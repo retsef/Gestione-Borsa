@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Gestione Borsa
+PROJECTNAME=Gestione-Borsa
 
 # Active Configuration
 DEFAULTCONF=Debug

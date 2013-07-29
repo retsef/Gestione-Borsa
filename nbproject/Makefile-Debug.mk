@@ -52,20 +52,20 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lfontconfig -lXext -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXfixes -lpango-1.0 -lcairo -lX11 -lgobject-2.0 -lgmodule -ldl -lglib-2.0
+LDLIBSOPTIONS=-lgtk-x11-2.0 -lgdk-x11-2.0 -lgtkextra-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangocairo-1.0 -lfontconfig -lXext -lXrender -lXinerama -lXi -lXrandr -lXcursor -lXfixes -lpango-1.0 -lcairo -lX11 -lgobject-2.0 -lgmodule -ldl -lglib-2.0
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestione_borsa
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestione-borsa
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestione_borsa: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestione-borsa: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestione_borsa ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestione-borsa ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.c
+	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/gtkextra-2.0 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.c
 
 # Subprojects
 .build-subprojects:
@@ -73,7 +73,7 @@ ${OBJECTDIR}/main.o: main.c
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestione_borsa
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestione-borsa
 
 # Subprojects
 .clean-subprojects:
