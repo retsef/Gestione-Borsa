@@ -47,7 +47,8 @@ void show_about(GtkWidget *widget, gpointer data){
     gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(dialog),"Gestione Borsa");
     gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(dialog),"Simula i meccanismi degli azionisti");
     gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(dialog), image);
-    gtk_about_dialog_set_license(GTK_ABOUT_DIALOG(dialog),"Gestione Borsa è software libero; è lecito redistribuirlo o modificarlo\n"
+    gtk_about_dialog_set_license(GTK_ABOUT_DIALOG(dialog),
+            "Gestione Borsa è software libero; è lecito redistribuirlo o modificarlo\n"
             "secondo i termini della GNU General Public License \n"
             "come pubblicata dalla Free Software Foundation;\n"
             "o la versione 2 o (a propria scelta) una versione successiva.\n\n"
