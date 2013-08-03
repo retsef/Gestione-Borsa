@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <gtk/gtk.h>
 
-GtkWidget * create_notebook_label(const gchar *text, GtkWidget *notebook, bool cloosable, int page){
+GtkWidget * create_notebook_label(const gchar *text, GtkNotebook *notebook, bool cloosable, int page){
     GtkWidget *hbox,*label,*button,*image;
     
     hbox = gtk_hbox_new (FALSE, 3);
@@ -26,7 +26,7 @@ GtkWidget * create_notebook_label(const gchar *text, GtkWidget *notebook, bool c
     return( hbox );
 }
 
-static void cb_close_tab(GtkButton *button,GtkNotebook *notebook ){
+static void cb_close_tab(GtkButton *button, GtkNotebook *notebook ){
     int page;
 
     page = GPOINTER_TO_INT( g_object_get_data( G_OBJECT( button ), "page" ) );
@@ -40,7 +40,7 @@ static void cb_close_tab(GtkButton *button,GtkNotebook *notebook ){
  */
 GdkPixbuf *create_pixbuf(const gchar * filename){
     
-    GdkPixbuf *pixbuf;
+    static GdkPixbuf *pixbuf;
     GError *error = NULL;
     pixbuf = gdk_pixbuf_new_from_file(filename, &error);
     if(!pixbuf) {

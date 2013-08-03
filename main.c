@@ -97,10 +97,16 @@ main( int argc, char *argv[]){
         {
             frame1 = gtk_frame_new("Nation Exposer");
             gtk_widget_show(frame1);
+            
+            GtkWidget *fixed1 = gtk_fixed_new();
 
+            GtkWidget *map = gtk_image_new_from_file("images/world-map.jpg");
             GtkWidget *text = gtk_label_new("Qui andra' una cartina contenente \n"
                     "i vari titoli azionari (cliccabili)");
-            gtk_container_add(GTK_CONTAINER(frame1), text);
+            gtk_container_add(GTK_CONTAINER(frame1), fixed1);
+            gtk_fixed_put(GTK_FIXED(fixed1), map, 10, 10);
+            gtk_widget_set_size_request(map, 670, 410);
+            gtk_fixed_put(GTK_FIXED(fixed1), text, 250, 200);
             //gtk_widget_show(label1);
 
             label1 = create_notebook_label("World", GTK_NOTEBOOK(notebook),FALSE, 0);
