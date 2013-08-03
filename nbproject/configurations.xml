@@ -4,10 +4,13 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Gtk_Notebook.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>Gtk_Notebook.c</itemPath>
+      <itemPath>main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -17,7 +20,6 @@
         <itemPath>images/money.png</itemPath>
       </logicalFolder>
       <itemPath>gpl-2.0.txt</itemPath>
-      <itemPath>main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -86,6 +88,10 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="Gtk_Notebook.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Gtk_Notebook.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="gpl-2.0.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="images/gtk-banner.png" ex="false" tool="3" flavor2="0">
@@ -116,6 +122,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Gtk_Notebook.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Gtk_Notebook.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="gpl-2.0.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="images/gtk-banner.png" ex="false" tool="3" flavor2="0">

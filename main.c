@@ -7,30 +7,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <stdbool.h>
 #include <gtk/gtk.h>
+#include "Gtk_Notebook.h"
+
+/*
 #include <string.h>
 #include <pthread.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-/**
- * Crea un pixbuf(buffer di pixel) per processare immagini
- * @param filename file immagine
- * @return un nuovo pixbuf
- */
-GdkPixbuf *create_pixbuf(const gchar * filename){
-    
-    GdkPixbuf *pixbuf;
-    GError *error = NULL;
-    pixbuf = gdk_pixbuf_new_from_file(filename, &error);
-    if(!pixbuf) {
-       fprintf(stderr, "%s\n", error->message);
-       g_error_free(error);
-    }
-
-    return pixbuf;
-}
+*/
 
 /**
  * Crea la finestra di About
@@ -68,8 +54,8 @@ main( int argc, char *argv[]){
     GtkWidget *fixed; //griglia per posizionare i widget
     
     GtkWidget *notebook;
-    GtkWidget *frame;
-    GtkWidget *label;
+    GtkWidget *frame1,*frame2,*frame3;
+    GtkWidget *label1,*label2,*label3;
     /*
      * Inizializziamo le librerie GTK+
      */
@@ -87,7 +73,7 @@ main( int argc, char *argv[]){
         //Imposta la posizione su schermo
         gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
         //Imposta la dimensione
-        gtk_window_set_default_size(GTK_WINDOW(window), 600, 400);
+        gtk_window_set_default_size(GTK_WINDOW(window), 1000, 800);
         //Imposta il titolo
         gtk_window_set_title(GTK_WINDOW(window), "Main");
         //Imposta icona finestra
@@ -104,31 +90,39 @@ main( int argc, char *argv[]){
     notebook = gtk_notebook_new();
     gtk_notebook_set_tab_pos(GTK_NOTEBOOK(notebook), GTK_POS_BOTTOM);
     gtk_fixed_put(GTK_FIXED(fixed), notebook, 10, 10);
-    gtk_widget_set_size_request(notebook, 550, 370);
+    gtk_widget_set_size_request(notebook, 700, 500);
     //gtk_widget_show(notebook);
 
     {
         {
-            frame = gtk_frame_new("World");
-            gtk_widget_show(frame);
+            frame1 = gtk_frame_new("Nation Exposer");
+            gtk_widget_show(frame1);
 
-            label = gtk_label_new("Inserire qualcosa di fico qui");
-            gtk_container_add(GTK_CONTAINER(frame), label);
-            gtk_widget_show(label);
+            GtkWidget *text = gtk_label_new("Qui andra' una cartina contenente \n"
+                    "i vari titoli azionari (cliccabili)");
+            gtk_container_add(GTK_CONTAINER(frame1), text);
+            //gtk_widget_show(label1);
 
-            label = gtk_label_new("Company");
-            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, label);
+            label1 = create_notebook_label("World", GTK_NOTEBOOK(notebook),FALSE, 0);
+            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame1, label1);
         }
         {
-            frame = gtk_frame_new("Home");
-            gtk_widget_show(frame);
+            frame2 = gtk_frame_new("Company");
+            
+            label2 = create_notebook_label("Company", GTK_NOTEBOOK(notebook),TRUE, 1);
+            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame2, label2);
+        }
+        {
+            frame3 = gtk_frame_new("Home");
+            gtk_widget_show(frame3);
+            
+            GtkWidget *text = gtk_label_new("Qui andranno le informazioni relative alle azioni aquistate \n"
+                    "e ai fondi disponibili, oltre alle quote di ingresso/uscita");
+            gtk_container_add(GTK_CONTAINER(frame3), text);
+            //gtk_widget_show(label3);
 
-            label = gtk_label_new("Inserire qualcosa di fico anche qui");
-            gtk_container_add(GTK_CONTAINER(frame), label);
-            gtk_widget_show(label);
-
-            label = gtk_label_new("Profile");
-            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, label);
+            label3 = create_notebook_label("Profile", GTK_NOTEBOOK(notebook),FALSE, 2);
+            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame3, label3);
         }
     }
     
@@ -137,7 +131,7 @@ main( int argc, char *argv[]){
      */
     
     about = gtk_button_new_with_label("About");//aggiunge il bottone di about
-    gtk_fixed_put(GTK_FIXED(fixed), about, 500, 370);
+    gtk_fixed_put(GTK_FIXED(fixed), about, 630, 505);
     gtk_widget_set_size_request(about, 80, 35);
     //Azione alla pressione del bottone
     g_signal_connect(G_OBJECT(about), "clicked", 
@@ -147,8 +141,8 @@ main( int argc, char *argv[]){
     {
       GtkWidget *gtk = gtk_image_new_from_file("images/gtk-banner.png"); 
       GtkWidget *text = gtk_label_new("Powered by");
-      gtk_fixed_put(GTK_FIXED(fixed), text, 0, 390);
-      gtk_fixed_put(GTK_FIXED(fixed), gtk, 72, 393);
+      gtk_fixed_put(GTK_FIXED(fixed), text, 0, 520);
+      gtk_fixed_put(GTK_FIXED(fixed), gtk, 80, 525);
     }
     
     //Mostra tutti i windget della finestra
