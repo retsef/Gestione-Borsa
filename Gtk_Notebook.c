@@ -1,6 +1,7 @@
 #include "Gtk_Notebook.h"
 #include <stdbool.h>
 #include <gtk/gtk.h>
+#include <gtkdatabox_typedefs.h>
 
 /**
  * Crea un tab per il notebook avente il bottone di chiusura
@@ -13,7 +14,8 @@
 GtkWidget * create_notebook_label(const gchar *text, GtkNotebook *notebook, bool cloosable, int page){
     GtkWidget *hbox,*label,*button,*image;
     
-    hbox = gtk_hbox_new (FALSE, 3);
+    /*Il widget hbox disporra' l'intestazione del label e il close button in un unica riga*/
+    hbox = gtk_hbox_new (FALSE, 3); 
 
     label = gtk_label_new (text);
     gtk_box_pack_start (GTK_BOX(hbox), label, TRUE, TRUE, 0);
@@ -62,4 +64,21 @@ GdkPixbuf *create_pixbuf(const gchar * filename){
     }
 
     return pixbuf;
+}
+
+GtkWidget * create_graph_with_rules(GtkWidget *container, gfloat x, gfloat y, int graph_lenght){
+    GtkDatabox *databox;
+    GtkWidget *databoxcontainer;
+    
+    gtk_databox_create_box_with_scrollbars_and_rulers (
+        databox, databoxcontainer,
+        TRUE, TRUE, TRUE, TRUE);
+
+    //const int grlen = 5;
+    //gfloat x[] = { 1 , 2,   3,  4,   5, 0 };
+    //gfloat y[] = { 4 , 5, 7.5, 11, 4.3, 0 };
+    GdkColor markerColor = { 0, 65000, 0, 0 };
+    GtkDataboxGraph *graph = gtk_databox_lines_new(graph_lenght, x, y, &markerColor, 1 );
+    gtk_databox_graph_add (databox, graph);
+    gtk_databox_auto_rescale (databox, 0.05);
 }

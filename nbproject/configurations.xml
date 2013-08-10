@@ -4,11 +4,13 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Background.h</itemPath>
       <itemPath>Gtk_Notebook.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>Background.c</itemPath>
       <itemPath>Gtk_Notebook.c</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
@@ -86,9 +88,14 @@
             <linkerLibLibItem>gmodule</linkerLibLibItem>
             <linkerLibLibItem>dl</linkerLibLibItem>
             <linkerLibLibItem>glib-2.0</linkerLibLibItem>
+            <linkerLibLibItem>gtkdatabox</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="Background.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Background.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Gtk_Notebook.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="Gtk_Notebook.h" ex="false" tool="3" flavor2="0">
@@ -125,6 +132,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Background.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Background.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Gtk_Notebook.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="Gtk_Notebook.h" ex="false" tool="3" flavor2="0">
