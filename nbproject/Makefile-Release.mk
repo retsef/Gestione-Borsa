@@ -36,7 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Background.o \
-	${OBJECTDIR}/Gtk_Notebook.o \
+	${OBJECTDIR}/Gtk_Widget.o \
 	${OBJECTDIR}/main.o
 
 
@@ -69,10 +69,10 @@ ${OBJECTDIR}/Background.o: Background.c
 	${RM} $@.d
 	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Background.o Background.c
 
-${OBJECTDIR}/Gtk_Notebook.o: Gtk_Notebook.c 
+${OBJECTDIR}/Gtk_Widget.o: Gtk_Widget.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gtk_Notebook.o Gtk_Notebook.c
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gtk_Widget.o Gtk_Widget.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}

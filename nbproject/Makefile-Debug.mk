@@ -36,7 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Background.o \
-	${OBJECTDIR}/Gtk_Notebook.o \
+	${OBJECTDIR}/Gtk_Widget.o \
 	${OBJECTDIR}/main.o
 
 
@@ -69,10 +69,10 @@ ${OBJECTDIR}/Background.o: Background.c
 	${RM} $@.d
 	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/gtkextra-2.0 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Background.o Background.c
 
-${OBJECTDIR}/Gtk_Notebook.o: Gtk_Notebook.c 
+${OBJECTDIR}/Gtk_Widget.o: Gtk_Widget.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/gtkextra-2.0 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gtk_Notebook.o Gtk_Notebook.c
+	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/gtkextra-2.0 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gtk_Widget.o Gtk_Widget.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}

@@ -15,7 +15,8 @@
 #include <gtkdatabox_ruler.h>
 #include <gtkdatabox_lines.h>
 
-#include "Gtk_Notebook.h"
+#include "Gtk_Widget.h"
+#include "Background.h"
 
 /*
 #include <pthread.h>
@@ -78,12 +79,12 @@ main( int argc, char *argv[]){
         //Imposta la dimensione
         gtk_window_set_default_size(GTK_WINDOW(window), 1000, 800);
         //Imposta il titolo
-        gtk_window_set_title(GTK_WINDOW(window), "Main");
+        gtk_window_set_title(GTK_WINDOW(window), "Gestione Borsa");
         //Imposta icona finestra
         gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("images/money.png"));
-
+        //Imposta il bordo tra la finetra ed il suo contenuto
         gtk_container_set_border_width(GTK_CONTAINER(window), 3);
-        
+        //Imposta l'impossibilita' di ridimensionare la finestra
         gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
     }
     
@@ -103,7 +104,7 @@ main( int argc, char *argv[]){
             
             GtkWidget *World_container = gtk_fixed_new();
 
-            GtkWidget *map = gtk_image_new_from_file("images/world-map.jpg");
+            GtkWidget *map = gtk_image_new_from_file("images/world_red_cntry_globe_hammer.gi.gif");
             GtkWidget *text = gtk_label_new("Qui andra' una cartina contenente \n"
                     "i vari titoli azionari (cliccabili)");
             gtk_container_add(GTK_CONTAINER(World), World_container);
@@ -115,31 +116,26 @@ main( int argc, char *argv[]){
             label1 = create_notebook_label("World", GTK_NOTEBOOK(notebook),FALSE, 0);
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), World, label1);
         }
+        
         { /*Tab del Company*/
             Company = gtk_frame_new("Company");
             
-            GtkWidget *Company_container = gtk_vbox_new (FALSE, 0);
-            /*
-                GtkWidget* databox          = 0;
-                GtkWidget* databoxcontainer = 0;
-                gtk_databox_create_box_with_scrollbars_and_rulers (
-                    &databox, &databoxcontainer,
-                    TRUE, TRUE, TRUE, TRUE);
-
-                const int grlen = 5;
-                gfloat x[] = { 1 , 2,   3,  4,   5, 0 };
-                gfloat y[] = { 4 , 5, 7.5, 11, 4.3, 0 };
-                GdkColor markerColor = { 0, 65000, 0, 0 };
-                GtkDataboxGraph* gr = gtk_databox_lines_new( grlen, x, y, &markerColor, 1 );
-                gtk_databox_graph_add (GTK_DATABOX (databox), gr);
-                gtk_databox_auto_rescale (GTK_DATABOX (databox), 0.05);
-            */
+            GtkWidget *Company_container = gtk_fixed_new();
+            
+            float x[] = { 1 , 2,   3,  4,   5, 0 };
+            float y[] = { 4 , 5, 7.5, 11, 4.3, 0 };
+            
+            GtkWidget *Company_graph = create_graph_with_rules(x,y,5);
+            
+            gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,170);
+            gtk_widget_set_size_request(Company_graph,680,260);
+            
             gtk_container_add(GTK_CONTAINER(Company), Company_container);
-            //gtk_box_pack_start(GTK_BOX(Company_container), databoxcontainer, 1, 1, 0 );
             
             label2 = create_notebook_label("Company", GTK_NOTEBOOK(notebook),TRUE, 1);
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), Company, label2);
         }
+        
         { /*Tab del Profile*/
             Profile = gtk_frame_new("Home");
             gtk_widget_show(Profile);
@@ -147,7 +143,6 @@ main( int argc, char *argv[]){
             GtkWidget *text = gtk_label_new("Qui andranno le informazioni relative alle azioni aquistate \n"
                     "e ai fondi disponibili, oltre alle quote di ingresso/uscita");
             gtk_container_add(GTK_CONTAINER(Profile), text);
-            //gtk_widget_show(label3);
 
             label3 = create_notebook_label("Profile", GTK_NOTEBOOK(notebook),FALSE, 2);
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), Profile, label3);

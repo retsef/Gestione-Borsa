@@ -1,7 +1,10 @@
-#include "Gtk_Notebook.h"
+#include "Gtk_Widget.h"
 #include <stdbool.h>
 #include <gtk/gtk.h>
-#include <gtkdatabox_typedefs.h>
+#include <gtkdatabox.h>
+#include <gtkdatabox_ruler.h>
+#include <gtkdatabox_lines.h>
+#include <gtk-1.2/gtk/gtkstyle.h>
 
 /**
  * Crea un tab per il notebook avente il bottone di chiusura
@@ -32,9 +35,9 @@ GtkWidget * create_notebook_label(const gchar *text, GtkNotebook *notebook, bool
         gtk_button_set_relief (GTK_BUTTON(button), GTK_RELIEF_NONE);
     }
 
-    gtk_widget_show_all( hbox );
+    gtk_widget_show_all(hbox);
 
-    return( hbox );
+    return(hbox);
 }
 /**
  * Funzione che interviene alla chiusura della tab
@@ -65,20 +68,31 @@ GdkPixbuf *create_pixbuf(const gchar * filename){
 
     return pixbuf;
 }
-
-GtkWidget * create_graph_with_rules(GtkWidget *container, gfloat x, gfloat y, int graph_lenght){
-    GtkDatabox *databox;
+/**
+ * Crea un Grafico (GtkDataBox) e lo attacca ad un Container
+ * @param container Container su cui appiccicare il grafico
+ * @param x Array di numeri per la X
+ * @param y Array di numeri per la Y
+ * @param graph_lenght Lunghezza del grafico
+ * @return Un GtkWidget contenente il grafico
+ */
+GtkWidget * create_graph_with_rules(gfloat *x, gfloat *y, int graph_lenght){
+    
+    GtkWidget *databox;
     GtkWidget *databoxcontainer;
+    GtkDataboxGraph *graph;
+    
+    //gtk_box_pack_start(GTK_BOX(container), databoxcontainer, 1, 1, 0 );
     
     gtk_databox_create_box_with_scrollbars_and_rulers (
-        databox, databoxcontainer,
-        TRUE, TRUE, TRUE, TRUE);
+        &databox, &databoxcontainer, FALSE, FALSE, TRUE, TRUE);
 
-    //const int grlen = 5;
-    //gfloat x[] = { 1 , 2,   3,  4,   5, 0 };
-    //gfloat y[] = { 4 , 5, 7.5, 11, 4.3, 0 };
     GdkColor markerColor = { 0, 65000, 0, 0 };
-    GtkDataboxGraph *graph = gtk_databox_lines_new(graph_lenght, x, y, &markerColor, 1 );
-    gtk_databox_graph_add (databox, graph);
-    gtk_databox_auto_rescale (databox, 0.05);
+    graph = gtk_databox_lines_new(graph_lenght, x, y, &markerColor, 1 );
+    gtk_databox_graph_add(GTK_DATABOX(databox), graph);
+    gtk_databox_auto_rescale(GTK_DATABOX(databox), 0.05);
+    
+    gtk_widget_show_all(databoxcontainer);
+
+    return(databoxcontainer);
 }

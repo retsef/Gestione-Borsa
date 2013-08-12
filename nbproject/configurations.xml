@@ -5,13 +5,13 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>Background.h</itemPath>
-      <itemPath>Gtk_Notebook.h</itemPath>
+      <itemPath>Gtk_Widget.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
       <itemPath>Background.c</itemPath>
-      <itemPath>Gtk_Notebook.c</itemPath>
+      <itemPath>Gtk_Widget.c</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -19,7 +19,7 @@
       <logicalFolder name="images" displayName="images" projectFiles="true">
         <itemPath>images/gtk-banner.png</itemPath>
         <itemPath>images/money.png</itemPath>
-        <itemPath>images/world-map.jpg</itemPath>
+        <itemPath>images/world_red_cntry_globe_hammer.gi.gif</itemPath>
       </logicalFolder>
       <itemPath>gpl-2.0.txt</itemPath>
       <itemPath>main.c</itemPath>
@@ -96,9 +96,9 @@
       </item>
       <item path="Background.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Gtk_Notebook.c" ex="false" tool="0" flavor2="0">
+      <item path="Gtk_Widget.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="Gtk_Notebook.h" ex="false" tool="3" flavor2="0">
+      <item path="Gtk_Widget.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="gpl-2.0.txt" ex="false" tool="3" flavor2="0">
       </item>
@@ -106,7 +106,10 @@
       </item>
       <item path="images/money.png" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="images/world-map.jpg" ex="false" tool="3" flavor2="0">
+      <item path="images/world_red_cntry_globe_hammer.gi.gif"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -136,9 +139,9 @@
       </item>
       <item path="Background.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Gtk_Notebook.c" ex="false" tool="0" flavor2="0">
+      <item path="Gtk_Widget.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="Gtk_Notebook.h" ex="false" tool="3" flavor2="0">
+      <item path="Gtk_Widget.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="gpl-2.0.txt" ex="false" tool="3" flavor2="0">
       </item>
@@ -146,7 +149,10 @@
       </item>
       <item path="images/money.png" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="images/world-map.jpg" ex="false" tool="3" flavor2="0">
+      <item path="images/world_red_cntry_globe_hammer.gi.gif"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
