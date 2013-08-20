@@ -128,14 +128,29 @@ main( int argc, char *argv[]){
                 GtkWidget *Company_frame = gtk_frame_new("Company");
                 GtkWidget *Company_container = gtk_fixed_new();
                 
+                    GtkWidget *Company_frame_info = gtk_frame_new("Info");
+                    GtkWidget *Company_info_container = gtk_fixed_new();
+                    GtkWidget *Company_info_template = gtk_label_new("Nome:\nTipo:\n"); 
+                    
+                    GtkWidget *Company_info_name = gtk_label_new(getCompany(0).name);
+                    GtkWidget *Company_info_type = gtk_label_new(type2Text(getCompany(0).type));
+                    
+                    gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_template,5,1);
+                    gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_name,50,1);
+                    gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_type,50,15);
+                    
+                    gtk_container_add(GTK_CONTAINER(Company_frame_info),Company_info_container);
+                    gtk_widget_set_size_request(Company_frame_info,350,80);
+                    gtk_fixed_put(GTK_FIXED(Company_container),Company_frame_info,5,5);
+                
                 //andranno rimpiazzati con riferimenti alle strutture
                 float x[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
                 float y[] = { 0, 5, 7.6, 8, 3.2, 3.4, 5, 2, 7, 9, 8.5, 9.2, 7, 5, 4.5, 6 };
                 
                 GtkWidget *Company_graph = create_graph_with_rules(x,y,7);
                 
-                gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,170);
-                gtk_widget_set_size_request(Company_graph,680,260);
+                gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,105);
+                gtk_widget_set_size_request(Company_graph,680,320);
                 
                 gtk_container_add(GTK_CONTAINER(Company_frame), Company_container);
                 
@@ -144,6 +159,7 @@ main( int argc, char *argv[]){
                 Company0 = gtk_button_new_with_label(getCompany(0).name);
                 gtk_fixed_put(GTK_FIXED(World_container),Company0, 100,100);
                 //evento
+                //todo more abstraction creation
                 g_signal_connect(G_OBJECT(Company0), "clicked", 
                          G_CALLBACK(create_company_tab(notebook,Company_label,Company0,Company_frame)), NULL);
                 

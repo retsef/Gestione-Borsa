@@ -3,19 +3,6 @@
  */
 #include "Background.h"
 #include <string.h>
-/*
-typedef char string[150];
-
-typedef enum {spa,sapa,srl,srls} society;
-
-typedef struct {
-    string name;
-    society type;
-    float found;
-    float x[30];
-    float y[30];
-} Company;
-*/
 
 static Company Company0,Company1,Company2,Company3,Company4,Company5;
 
@@ -23,6 +10,11 @@ void init_company(){
     {
         Company0.name = "Pincopallino industries";
         Company0.type = spa;
+        //float n;
+        /*for(n=0;n<15;n++){
+            Company0.x[n]=n;
+            Company0.y[n]=0;
+        }*/
         Company0.found = 150000;
     }
     {
@@ -67,5 +59,36 @@ Company getCompany(int n){
         return Company5;
     else
         g_print("Company selezionata non esistente");
+}
+
+/*
+ * Le righe seguenti servono a convertire il type in una stringa
+ * Creiamo una stuttura per le associazioni
+ */ 
+typedef struct
+{
+    society val;
+    char *val_name;
+} type_TxtMap;
+//Creiamo le associazioni
+static const type_TxtMap type_list[] =
+{
+    {spa,"spa"},
+    {sapa,"sapa"},
+    {srl,"srl"},
+    {srls,"srls"},
+};
+//trasformiamo il type in stringa
+char* type2Text(society val){
+    const size_t map_sz = sizeof(type_list) / sizeof(*type_list);
+    size_t n = 0;
+     
+    for (n ; n < map_sz; n++)
+    {
+        if (type_list[n].val == val)
+            return type_list[n].val_name;
+    }//for
+ 
+    return ("!!invalid type val!!");
 }
     
