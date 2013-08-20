@@ -111,7 +111,7 @@ void * create_company_tab(GtkWidget *notebook, GtkWidget *label, GtkWidget *butt
 
     gtk_container_add(GTK_CONTAINER(Company), Company_container);
      */
-    label = create_notebook_label(gtk_button_get_label(GTK_BUTTON(button)), GTK_NOTEBOOK(notebook),TRUE, 5);
+    label = create_notebook_label(gtk_button_get_label(GTK_BUTTON(button)), GTK_NOTEBOOK(notebook),TRUE, 1);
     gtk_notebook_append_page(GTK_NOTEBOOK(notebook), Company, label);
     gtk_widget_show_all(notebook);
 }

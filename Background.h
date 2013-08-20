@@ -5,16 +5,15 @@
  * Created on 6 agosto 2013, 13.10
  */
 
-typedef char string[150];
 
 typedef enum {spa,sapa,srl,srls} society;
 
 typedef struct {
-    string name;
+    char* name;
     society type;
     float found;
-    float x[30];
-    float y[30];
+    float x[16];
+    float y[16];
 } Company;
 
 void init_company();
