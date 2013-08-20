@@ -61,14 +61,12 @@
             <pElem>/usr/lib/glib-2.0/include</pElem>
             <pElem>/usr/lib/gtk-2.0/include</pElem>
             <pElem>/usr/include/gdk-pixbuf-2.0</pElem>
-            <pElem>/usr/include/gtkextra-2.0</pElem>
           </incDir>
         </cTool>
         <linkerTool>
           <linkerLibItems>
             <linkerLibLibItem>gtk-x11-2.0</linkerLibLibItem>
             <linkerLibLibItem>gdk-x11-2.0</linkerLibLibItem>
-            <linkerLibLibItem>gtkextra-x11-2.0</linkerLibLibItem>
             <linkerLibLibItem>atk-1.0</linkerLibLibItem>
             <linkerLibLibItem>gdk_pixbuf-2.0</linkerLibLibItem>
             <linkerLibLibItem>m</linkerLibLibItem>
@@ -85,10 +83,10 @@
             <linkerLibLibItem>cairo</linkerLibLibItem>
             <linkerLibLibItem>X11</linkerLibLibItem>
             <linkerLibLibItem>gobject-2.0</linkerLibLibItem>
-            <linkerLibLibItem>gmodule</linkerLibLibItem>
             <linkerLibLibItem>dl</linkerLibLibItem>
             <linkerLibLibItem>glib-2.0</linkerLibLibItem>
             <linkerLibLibItem>gtkdatabox</linkerLibLibItem>
+            <linkerLibLibItem>gmodule-2.0</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>

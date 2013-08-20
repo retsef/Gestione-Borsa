@@ -14,6 +14,7 @@
 #include <gtkdatabox.h>
 #include <gtkdatabox_ruler.h>
 #include <gtkdatabox_lines.h>
+#include <gtk-3.0/gtk/gtkbbox.h>
 
 #include "Gtk_Widget.h"
 #include "Background.h"
@@ -51,6 +52,11 @@ void show_about(GtkWidget *widget, gpointer data){
 }
 
 main( int argc, char *argv[]){
+    
+    /*
+     * Inizializziamo le librerie GTK+
+     */
+    gtk_init(&argc, &argv);
     
     GtkWidget *window; //finestra principale
     GtkWidget *about; //finestra di about
@@ -115,17 +121,46 @@ main( int argc, char *argv[]){
 
             label1 = create_notebook_label("World", GTK_NOTEBOOK(notebook),FALSE, 0);
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), World, label1);
+            
+            {   //bottone
+                GtkWidget *Company0;
+                Company0 = gtk_button_new_with_label("Pincopallino industries");
+                gtk_fixed_put(GTK_FIXED(World_container),Company0, 100,100);
+                //tab effettivo
+                GtkWidget *Company = gtk_frame_new("Company");
+                GtkWidget *Company_container = gtk_fixed_new();
+
+                float x[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+                float y[] = { 0, 5, 7.6, 8, 3.2, 3.4, 5, 2, 7, 9, 8.5, 9.2, 7, 5, 4.5, 6 };
+
+                GtkWidget *Company_graph = create_graph_with_rules(x,y,7);
+
+                gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,170);
+                gtk_widget_set_size_request(Company_graph,680,260);
+
+                gtk_container_add(GTK_CONTAINER(Company), Company_container);
+                
+                //evento
+                //g_signal_connect(G_OBJECT(Company0), "clicked", 
+                //        G_CALLBACK(create_company_tab(notebook,label2,Company0,Company)), NULL);
+                
+                /*g_signal_connect(G_OBJECT(Company0), "clicked",
+                         G_CALLBACK(create_company_tab(notebook,label2,Company0,Company)),
+                         GTK_NOTEBOOK(notebook));*/
+            
+            }
         }
-        
-        { /*Tab del Company*/
+        /*Tab del Company*/
+        /*
+        { 
             Company = gtk_frame_new("Company");
             
             GtkWidget *Company_container = gtk_fixed_new();
             
-            float x[] = { 1 , 2,   3,  4,   5, 0 };
-            float y[] = { 4 , 5, 7.5, 11, 4.3, 0 };
+            float x[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+            float y[] = { 0, 5, 7.6, 8, 3.2, 3.4, 5, 2, 7, 9, 8.5, 9.2, 7, 5, 4.5, 6 };
             
-            GtkWidget *Company_graph = create_graph_with_rules(x,y,5);
+            GtkWidget *Company_graph = create_graph_with_rules(x,y,7);
             
             gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,170);
             gtk_widget_set_size_request(Company_graph,680,260);
@@ -134,7 +169,7 @@ main( int argc, char *argv[]){
             
             label2 = create_notebook_label("Company", GTK_NOTEBOOK(notebook),TRUE, 1);
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), Company, label2);
-        }
+        }*/
         
         { /*Tab del Profile*/
             Profile = gtk_frame_new("Home");
@@ -165,12 +200,13 @@ main( int argc, char *argv[]){
       GtkWidget *gtk = gtk_image_new_from_file("images/gtk-banner.png"); 
       GtkWidget *text = gtk_label_new("Powered by");
       gtk_fixed_put(GTK_FIXED(fixed), text, 0, 520);
-      gtk_fixed_put(GTK_FIXED(fixed), gtk, 80, 525);
+      gtk_fixed_put(GTK_FIXED(fixed), gtk, 70, 520);
     }
     
     //Mostra tutti i windget della finestra
     gtk_container_add(GTK_CONTAINER(window), fixed);
-    gtk_widget_show_all(window);
+    gtk_widget_show_all(window); //<-- da fixare perche' mosta TUTTI i widget compresi quelli da oscurare
+    
     
     //Evento della window per distrugerla quando viene chiusa
     g_signal_connect(window, "destroy", 

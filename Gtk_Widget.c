@@ -4,7 +4,6 @@
 #include <gtkdatabox.h>
 #include <gtkdatabox_ruler.h>
 #include <gtkdatabox_lines.h>
-#include <gtk-1.2/gtk/gtkstyle.h>
 
 /**
  * Crea un tab per il notebook avente il bottone di chiusura
@@ -95,4 +94,24 @@ GtkWidget * create_graph_with_rules(gfloat *x, gfloat *y, int graph_lenght){
     gtk_widget_show_all(databoxcontainer);
 
     return(databoxcontainer);
+}
+
+void * create_company_tab(GtkWidget *notebook, GtkWidget *label, GtkWidget *button, GtkWidget *Company){
+    /*
+    GtkWidget *Company = gtk_frame_new("Company");
+    GtkWidget *Company_container = gtk_fixed_new();
+
+    float x[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+    float y[] = { 0, 5, 7.6, 8, 3.2, 3.4, 5, 2, 7, 9, 8.5, 9.2, 7, 5, 4.5, 6 };
+
+    GtkWidget *Company_graph = create_graph_with_rules(x,y,7);
+
+    gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,170);
+    gtk_widget_set_size_request(Company_graph,680,260);
+
+    gtk_container_add(GTK_CONTAINER(Company), Company_container);
+     */
+    label = create_notebook_label(gtk_button_get_label(GTK_BUTTON(button)), GTK_NOTEBOOK(notebook),TRUE, 5);
+    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), Company, label);
+    gtk_widget_show_all(notebook);
 }
