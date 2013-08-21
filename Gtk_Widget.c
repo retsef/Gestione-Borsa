@@ -75,8 +75,7 @@ GdkPixbuf *create_pixbuf(const gchar * filename){
  * @param graph_lenght Lunghezza del grafico
  * @return Un GtkWidget contenente il grafico
  */
-GtkWidget * create_graph_with_rules(gfloat *x, gfloat *y, int graph_lenght){
-    
+GtkWidget * create_graph_with_rules(gfloat *x, gfloat *y, int graph_lenght){    
     GtkWidget *databox;
     GtkWidget *databoxcontainer;
     GtkDataboxGraph *graph;

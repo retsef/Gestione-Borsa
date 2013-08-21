@@ -11,10 +11,12 @@ typedef struct {
     char* name;
     society type;
     float found;
-    float x[50];
-    float y[50];
+    float x[15];
+    float y[15];
 } Company;
 
 void init_company();
 Company getCompany(int n);
+void update();
+
 char* type2Text(society val);

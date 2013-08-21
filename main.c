@@ -121,7 +121,7 @@ main( int argc, char *argv[]){
             World_label = create_notebook_label("World", GTK_NOTEBOOK(notebook),FALSE, 0);
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), World_frame, World_label);
             
-            {   
+            {   //company
                 init_company();
                 
                 //tab
@@ -129,6 +129,7 @@ main( int argc, char *argv[]){
                 GtkWidget *Company_container = gtk_fixed_new();
                 
                     GtkWidget *Company_frame_info = gtk_frame_new("Info");
+                    gtk_frame_set_shadow_type(GTK_FRAME(Company_frame_info), GTK_SHADOW_IN);
                     GtkWidget *Company_info_container = gtk_fixed_new();
                     GtkWidget *Company_info_template = gtk_label_new("Nome:\nTipo:\n"); 
                     
@@ -147,7 +148,8 @@ main( int argc, char *argv[]){
                 float x[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
                 float y[] = { 0, 5, 7.6, 8, 3.2, 3.4, 5, 2, 7, 9, 8.5, 9.2, 7, 5, 4.5, 6 };
                 
-                GtkWidget *Company_graph = create_graph_with_rules(x,y,7);
+                GtkWidget *Company_graph = create_graph_with_rules(x,y,(sizeof(y)/sizeof(*y)));
+                //GtkWidget *Company_graph = create_graph_with_rules(getCompany(0).x,getCompany(0).y,7);
                 
                 gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,105);
                 gtk_widget_set_size_request(Company_graph,680,320);
@@ -218,7 +220,7 @@ main( int argc, char *argv[]){
       GtkWidget *gtk = gtk_image_new_from_file("images/gtk-banner.png"); 
       GtkWidget *text = gtk_label_new("Powered by");
       gtk_fixed_put(GTK_FIXED(fixed), text, 0, 520);
-      gtk_fixed_put(GTK_FIXED(fixed), gtk, 70, 520);
+      gtk_fixed_put(GTK_FIXED(fixed), gtk, 75, 520);
       gtk_widget_show(gtk);
       gtk_widget_show(text);
     }

@@ -10,11 +10,11 @@ void init_company(){
     {
         Company0.name = "Pincopallino industries";
         Company0.type = spa;
-        //float n;
-        /*for(n=0;n<15;n++){
+        int n=0;
+        for(n=0;n<15;n++){
             Company0.x[n]=n;
             Company0.y[n]=0;
-        }*/
+        }
         Company0.found = 150000;
     }
     {
@@ -61,6 +61,8 @@ Company getCompany(int n){
         g_print("Company selezionata non esistente");
 }
 
+void update(){}
+
 /*
  * Le righe seguenti servono a convertire il type in una stringa
  * Creiamo una stuttura per le associazioni
@@ -80,10 +82,10 @@ static const type_TxtMap type_list[] =
 };
 //trasformiamo il type in stringa
 char* type2Text(society val){
-    const size_t map_sz = sizeof(type_list) / sizeof(*type_list);
-    size_t n = 0;
+    int map_sz = sizeof(type_list) / sizeof(*type_list);
+    int n;
      
-    for (n ; n < map_sz; n++)
+    for (n=0; n < map_sz; n++)
     {
         if (type_list[n].val == val)
             return type_list[n].val_name;
