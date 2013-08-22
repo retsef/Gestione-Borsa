@@ -123,7 +123,7 @@ main( int argc, char *argv[]){
             
             {   //company
                 init_company();
-                
+                /*
                 //tab
                 GtkWidget *Company_frame = gtk_frame_new("Company");
                 GtkWidget *Company_container = gtk_fixed_new();
@@ -155,7 +155,7 @@ main( int argc, char *argv[]){
                 gtk_widget_set_size_request(Company_graph,680,320);
                 
                 gtk_container_add(GTK_CONTAINER(Company_frame), Company_container);
-                
+                */
                 //bottone
                 GtkWidget *Company0;
                 Company0 = gtk_button_new_with_label(getCompany(0).name);
@@ -163,7 +163,7 @@ main( int argc, char *argv[]){
                 //evento
                 //todo more abstraction creation
                 g_signal_connect(G_OBJECT(Company0), "clicked", 
-                         G_CALLBACK(create_company_tab(notebook,Company_label,Company0,Company_frame)), NULL);
+                         G_CALLBACK(create_company_tab(notebook,Company_label,getCompany(0))), NULL);
                 
                 /*g_signal_connect(G_OBJECT(Company0), "clicked",
                          G_CALLBACK(create_company_tab(notebook,label2,Company0,Company)),
