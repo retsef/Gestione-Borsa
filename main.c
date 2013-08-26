@@ -14,7 +14,7 @@
 #include <gtkdatabox.h>
 #include <gtkdatabox_ruler.h>
 #include <gtkdatabox_lines.h>
-#include <gtk-3.0/gtk/gtkbbox.h>
+#include <gtk/gtkbbox.h>
 
 #include "Gtk_Widget.h"
 #include "Background.h"

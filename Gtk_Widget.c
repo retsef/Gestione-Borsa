@@ -103,8 +103,8 @@ GtkWidget * create_company_frame(Company Company_n){
         GtkWidget *Company_frame_info = gtk_frame_new("Info");
         gtk_frame_set_shadow_type(GTK_FRAME(Company_frame_info), GTK_SHADOW_IN);
         GtkWidget *Company_info_container = gtk_fixed_new();
-        GtkWidget *Company_info_template = gtk_label_new("Nome:\nTipo:\n"); 
-
+        GtkWidget *Company_info_template = gtk_label_new("Nome:\nTipo:\n");
+        char* name = Company_n.name;
         GtkWidget *Company_info_name = gtk_label_new(Company_n.name);
         GtkWidget *Company_info_type = gtk_label_new(type2Text(Company_n.type));
 
@@ -120,7 +120,7 @@ GtkWidget * create_company_frame(Company Company_n){
     float x[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
     float y[] = { 0, 5, 7.6, 8, 3.2, 3.4, 5, 2, 7, 9, 8.5, 9.2, 7, 5, 4.5, 6 };
 
-    GtkWidget *Company_graph = create_graph_with_rules(x,y,(sizeof(y)/sizeof(*y)));
+    GtkWidget *Company_graph = create_graph_with_rules(x,y,16);
     //GtkWidget *Company_graph = create_graph_with_rules(getCompany(0).x,getCompany(0).y,7);
 
     gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,105);

@@ -4,12 +4,26 @@
  *
  * Created on 6 agosto 2013, 13.10
  */
+#ifndef BACKGROUND_H
+#define BACKGROUND_H
 #include <stdlib.h>
-//fa un alias tra la struttura _Comapny a Comany (puntatore opaco)
-typedef struct _Company Company;
+
+typedef enum {spa,sapa,srl,srls} society;
+
+typedef struct{
+    char* name;
+    society type;
+    float found;
+    float x[15];
+    float y[15];
+}Company;
+
+//typedef struct Company Company;
 
 void init_company();
-Company *getCompany(int n);
+Company getCompany(int n);
 void update();
 
 char* type2Text(society val);
+
+#endif
