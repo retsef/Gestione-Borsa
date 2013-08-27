@@ -15,6 +15,8 @@
 #include <gtkdatabox_ruler.h>
 #include <gtkdatabox_lines.h>
 #include <gtk/gtkbbox.h>
+#include <gtk-3.0/gtk/gtknotebook.h>
+#include <gtk-3.0/gtk/gtkwidget.h>
 
 #include "Gtk_Widget.h"
 #include "Background.h"
@@ -64,8 +66,8 @@ main( int argc, char *argv[]){
     GtkWidget *fixed; //griglia per posizionare i widget
     
     GtkWidget *notebook;
-    GtkWidget *World_frame,*Company_frame,*Profile_frame;
-    GtkWidget *World_label,*Company_label,*Profile_label;
+    GtkWidget *World_frame,*Profile_frame;
+    GtkWidget *World_label,*Profile_label;
     /*
      * Inizializziamo le librerie GTK+
      */
@@ -101,7 +103,9 @@ main( int argc, char *argv[]){
     gtk_notebook_set_tab_pos(GTK_NOTEBOOK(notebook), GTK_POS_BOTTOM);
     gtk_fixed_put(GTK_FIXED(fixed), notebook, 10, 10);
     gtk_widget_set_size_request(notebook, 700, 500);
-    //gtk_widget_show(notebook);
+    
+    //company
+    init_company();
 
     {
         { /*Tab del World*/
@@ -121,75 +125,18 @@ main( int argc, char *argv[]){
             World_label = create_notebook_label("World", GTK_NOTEBOOK(notebook),FALSE, 0);
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), World_frame, World_label);
             
-            {   //company
-                init_company();
-                /*
-                //tab
-                GtkWidget *Company_frame = gtk_frame_new("Company");
-                GtkWidget *Company_container = gtk_fixed_new();
-                
-                    GtkWidget *Company_frame_info = gtk_frame_new("Info");
-                    gtk_frame_set_shadow_type(GTK_FRAME(Company_frame_info), GTK_SHADOW_IN);
-                    GtkWidget *Company_info_container = gtk_fixed_new();
-                    GtkWidget *Company_info_template = gtk_label_new("Nome:\nTipo:\n"); 
-                    
-                    GtkWidget *Company_info_name = gtk_label_new(getCompany(0).name);
-                    GtkWidget *Company_info_type = gtk_label_new(type2Text(getCompany(0).type));
-                    
-                    gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_template,5,1);
-                    gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_name,50,1);
-                    gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_type,50,15);
-                    
-                    gtk_container_add(GTK_CONTAINER(Company_frame_info),Company_info_container);
-                    gtk_widget_set_size_request(Company_frame_info,350,80);
-                    gtk_fixed_put(GTK_FIXED(Company_container),Company_frame_info,5,5);
-                
-                //andranno rimpiazzati con riferimenti alle strutture
-                float x[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-                float y[] = { 0, 5, 7.6, 8, 3.2, 3.4, 5, 2, 7, 9, 8.5, 9.2, 7, 5, 4.5, 6 };
-                
-                GtkWidget *Company_graph = create_graph_with_rules(x,y,(sizeof(y)/sizeof(*y)));
-                //GtkWidget *Company_graph = create_graph_with_rules(getCompany(0).x,getCompany(0).y,7);
-                
-                gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,105);
-                gtk_widget_set_size_request(Company_graph,680,320);
-                
-                gtk_container_add(GTK_CONTAINER(Company_frame), Company_container);
-                */
+            {   
                 //bottone
                 GtkWidget *Company0;
                 Company0 = gtk_button_new_with_label(getCompany(0).name);
                 gtk_fixed_put(GTK_FIXED(World_container),Company0, 100,100);
-                //evento
-                //todo more abstraction creation
-                g_signal_connect(G_OBJECT(Company0), "clicked", 
-                         G_CALLBACK(create_company_tab(notebook,Company_label,getCompany(0))), NULL);
                 
-                /*g_signal_connect(G_OBJECT(Company0), "clicked",
-                         G_CALLBACK(create_company_tab(notebook,label2,Company0,Company)),
-                         GTK_NOTEBOOK(notebook));*/
+                //evento
+                g_signal_connect(G_OBJECT(Company0), "clicked", 
+                        (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+
             }
         }
-        /*Tab del Company*/
-        /*
-        { 
-            Company = gtk_frame_new("Company");
-            
-            GtkWidget *Company_container = gtk_fixed_new();
-            
-            float x[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-            float y[] = { 0, 5, 7.6, 8, 3.2, 3.4, 5, 2, 7, 9, 8.5, 9.2, 7, 5, 4.5, 6 };
-            
-            GtkWidget *Company_graph = create_graph_with_rules(x,y,7);
-            
-            gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,170);
-            gtk_widget_set_size_request(Company_graph,680,260);
-            
-            gtk_container_add(GTK_CONTAINER(Company), Company_container);
-            
-            label2 = create_notebook_label("Company", GTK_NOTEBOOK(notebook),TRUE, 1);
-            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), Company, label2);
-        }*/
         
         { /*Tab del Profile*/
             Profile_frame = gtk_frame_new("Home");

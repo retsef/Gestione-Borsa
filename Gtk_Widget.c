@@ -87,7 +87,7 @@ GtkWidget * create_graph_with_rules(gfloat *x, gfloat *y, int graph_lenght){
         &databox, &databoxcontainer, FALSE, FALSE, TRUE, TRUE);
 
     GdkColor markerColor = { 0, 65000, 0, 0 };
-    graph = gtk_databox_lines_new(graph_lenght, x, y, &markerColor, 1 );
+    graph = gtk_databox_lines_new(graph_lenght, x, y, &markerColor, 1);
     gtk_databox_graph_add(GTK_DATABOX(databox), graph);
     gtk_databox_auto_rescale(GTK_DATABOX(databox), 0.05);
     
@@ -99,7 +99,7 @@ GtkWidget * create_graph_with_rules(gfloat *x, gfloat *y, int graph_lenght){
 GtkWidget * create_company_frame(Company Company_n){
     GtkWidget *Company_frame = gtk_frame_new("Company");
     GtkWidget *Company_container = gtk_fixed_new();
-
+    {
         GtkWidget *Company_frame_info = gtk_frame_new("Info");
         gtk_frame_set_shadow_type(GTK_FRAME(Company_frame_info), GTK_SHADOW_IN);
         GtkWidget *Company_info_container = gtk_fixed_new();
@@ -115,13 +115,8 @@ GtkWidget * create_company_frame(Company Company_n){
         gtk_container_add(GTK_CONTAINER(Company_frame_info),Company_info_container);
         gtk_widget_set_size_request(Company_frame_info,350,80);
         gtk_fixed_put(GTK_FIXED(Company_container),Company_frame_info,5,5);
-        
-    //andranno rimpiazzati con riferimenti alle strutture
-    float x[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-    float y[] = { 0, 5, 7.6, 8, 3.2, 3.4, 5, 2, 7, 9, 8.5, 9.2, 7, 5, 4.5, 6 };
-
-    GtkWidget *Company_graph = create_graph_with_rules(x,y,16);
-    //GtkWidget *Company_graph = create_graph_with_rules(getCompany(0).x,getCompany(0).y,7);
+    }   
+    GtkWidget *Company_graph = create_graph_with_rules(Company_n.x,Company_n.y,(sizeof(Company_n.y)/sizeof(*Company_n.y)));
 
     gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,105);
     gtk_widget_set_size_request(Company_graph,680,320);
@@ -131,9 +126,11 @@ GtkWidget * create_company_frame(Company Company_n){
     return Company_frame;
 }
 
-void * create_company_tab(GtkWidget *notebook, GtkWidget *label, Company Company_n){
+void create_company_tab(GtkButton *button, GtkWidget *notebook){
     
-    label = create_notebook_label(Company_n.name, GTK_NOTEBOOK(notebook),TRUE, 1);
-    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), create_company_frame(Company_n), label);
+    GtkWidget *Company0_label = create_notebook_label(getCompany(0).name, GTK_NOTEBOOK(notebook),TRUE, 1);
+    GtkWidget *Company0_frame = create_company_frame(getCompany(0));
+                
+    gtk_notebook_insert_page(GTK_NOTEBOOK(notebook), Company0_frame, Company0_label,1);
     gtk_widget_show_all(notebook);
 }
