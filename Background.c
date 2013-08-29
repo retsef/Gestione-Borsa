@@ -2,7 +2,7 @@
  * Qui verranno istanziati le varie Company e il server di aggiornamenti dei Found
  */
 #include "Background.h"
-#include <stdlib.h>
+#include <string.h>
 
 static Company Company0,Company1,Company2,Company3,Company4,Company5;
 
@@ -13,9 +13,7 @@ void init_company(){
         int n;
         for(n=0;n<=15;n++){
             Company0.x[n]=n;
-            Company0.y[n]=0;
-            Company0.y[2]=1;
-            Company0.y[3]=1;
+            Company0.y[n]=1;
         }
         Company0.found = 150000;
     }
@@ -46,21 +44,38 @@ void init_company(){
     }
 }
 
-Company getCompany(int n){
-    if (n=0)
-       return Company0;
-    else if (n=1)
+Company get_Company_by_name(const char* name){
+    if(strcmp(name,Company0.name)==0)
+        return Company0;
+    else if(strcmp(name,Company1.name)==0)
         return Company1;
-    else if (n=2)
+    else if(strcmp(name,Company2.name)==0)
         return Company2;
-    else if (n=3)
+    else if(strcmp(name,Company3.name)==0)
         return Company3;
-    else if (n=4)
+    else if(strcmp(name,Company4.name)==0)
         return Company4;
-    else if (n=5)
+    else if(strcmp(name,Company5.name)==0)
         return Company5;
     else
-        g_print("Company selezionata non esistente");
+        printf("\nNon esiste una Company con quel nome\n");
+}
+
+Company get_Company(int n){
+    if (n==0)
+       return Company0;
+    else if (n==1)
+        return Company1;
+    else if (n==2)
+        return Company2;
+    else if (n==3)
+        return Company3;
+    else if (n==4)
+        return Company4;
+    else if (n==5)
+        return Company5;
+    else
+        printf("Company selezionata non esistente\n");
 }
 
 void update(){}

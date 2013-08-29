@@ -103,9 +103,6 @@ main( int argc, char *argv[]){
     gtk_notebook_set_tab_pos(GTK_NOTEBOOK(notebook), GTK_POS_BOTTOM);
     gtk_fixed_put(GTK_FIXED(fixed), notebook, 10, 10);
     gtk_widget_set_size_request(notebook, 700, 500);
-    
-    //company
-    init_company();
 
     {
         { /*Tab del World*/
@@ -126,13 +123,24 @@ main( int argc, char *argv[]){
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), World_frame, World_label);
             
             {   
+                //company
+                init_company();
                 //bottone
                 GtkWidget *Company0;
-                Company0 = gtk_button_new_with_label(getCompany(0).name);
+                Company0 = gtk_button_new_with_label(get_Company(0).name);
                 gtk_fixed_put(GTK_FIXED(World_container),Company0, 100,100);
                 
                 //evento
                 g_signal_connect(G_OBJECT(Company0), "clicked", 
+                        (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                
+                //bottone
+                GtkWidget *Company1;
+                Company1 = gtk_button_new_with_label(get_Company(1).name);
+                gtk_fixed_put(GTK_FIXED(World_container),Company1, 100,200);
+                
+                //evento
+                g_signal_connect(G_OBJECT(Company1), "clicked", 
                         (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
 
             }
@@ -176,7 +184,6 @@ main( int argc, char *argv[]){
     gtk_container_add(GTK_CONTAINER(window), fixed);
     
     gtk_widget_show_all(window); //<-- da fixare perche' mosta TUTTI i widget compresi quelli da oscurare
-    
     
     //Evento della window per distrugerla quando viene chiusa
     g_signal_connect(window, "destroy", 

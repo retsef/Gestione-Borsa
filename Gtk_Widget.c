@@ -102,9 +102,9 @@ GtkWidget * create_company_frame(Company Company_n){
     {
         GtkWidget *Company_frame_info = gtk_frame_new("Info");
         gtk_frame_set_shadow_type(GTK_FRAME(Company_frame_info), GTK_SHADOW_IN);
+        
         GtkWidget *Company_info_container = gtk_fixed_new();
         GtkWidget *Company_info_template = gtk_label_new("Nome:\nTipo:\n");
-        char* name = Company_n.name;
         GtkWidget *Company_info_name = gtk_label_new(Company_n.name);
         GtkWidget *Company_info_type = gtk_label_new(type2Text(Company_n.type));
 
@@ -128,8 +128,8 @@ GtkWidget * create_company_frame(Company Company_n){
 
 void create_company_tab(GtkButton *button, GtkWidget *notebook){
     
-    GtkWidget *Company0_label = create_notebook_label(getCompany(0).name, GTK_NOTEBOOK(notebook),TRUE, 1);
-    GtkWidget *Company0_frame = create_company_frame(getCompany(0));
+    GtkWidget *Company0_label = create_notebook_label(get_Company_by_name(gtk_button_get_label(button)).name, GTK_NOTEBOOK(notebook),TRUE, 1);
+    GtkWidget *Company0_frame = create_company_frame(get_Company_by_name(gtk_button_get_label(button)));
                 
     gtk_notebook_insert_page(GTK_NOTEBOOK(notebook), Company0_frame, Company0_label,1);
     gtk_widget_show_all(notebook);

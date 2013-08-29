@@ -21,7 +21,8 @@ typedef struct{
 //typedef struct Company Company;
 
 void init_company();
-Company getCompany(int n);
+Company get_Company_by_name(const char* name);
+Company get_Company(int n);
 void update();
 
 char* type2Text(society val);
