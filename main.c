@@ -14,9 +14,6 @@
 #include <gtkdatabox.h>
 #include <gtkdatabox_ruler.h>
 #include <gtkdatabox_lines.h>
-#include <gtk/gtkbbox.h>
-#include <gtk-3.0/gtk/gtknotebook.h>
-#include <gtk-3.0/gtk/gtkwidget.h>
 
 #include "Gtk_Widget.h"
 #include "Background.h"
@@ -112,12 +109,12 @@ main( int argc, char *argv[]){
             GtkWidget *World_container = gtk_fixed_new();
 
             GtkWidget *map = gtk_image_new_from_file("images/world_red_cntry_globe_hammer.gi.gif");
-            GtkWidget *text = gtk_label_new("Qui andra' una cartina contenente \n"
-                    "i vari titoli azionari (cliccabili)");
+            //GtkWidget *text = gtk_label_new("Qui andra' una cartina contenente \n"
+            //        "i vari titoli azionari (cliccabili)");
             gtk_container_add(GTK_CONTAINER(World_frame), World_container);
             gtk_fixed_put(GTK_FIXED(World_container), map, 10, 10);
             gtk_widget_set_size_request(map, 670, 410);
-            gtk_fixed_put(GTK_FIXED(World_container), text, 250, 200);
+            //gtk_fixed_put(GTK_FIXED(World_container), text, 250, 200);
 
             World_label = create_notebook_label("World", GTK_NOTEBOOK(notebook),FALSE, 0);
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), World_frame, World_label);
@@ -125,24 +122,66 @@ main( int argc, char *argv[]){
             {   
                 //company
                 init_company();
-                //bottone
-                GtkWidget *Company0;
-                Company0 = gtk_button_new_with_label(get_Company(0).name);
-                gtk_fixed_put(GTK_FIXED(World_container),Company0, 100,100);
-                
-                //evento
-                g_signal_connect(G_OBJECT(Company0), "clicked", 
-                        (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
-                
-                //bottone
-                GtkWidget *Company1;
-                Company1 = gtk_button_new_with_label(get_Company(1).name);
-                gtk_fixed_put(GTK_FIXED(World_container),Company1, 100,200);
-                
-                //evento
-                g_signal_connect(G_OBJECT(Company1), "clicked", 
-                        (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                {
+                    //bottone
+                    GtkWidget *Company0;
+                    Company0 = gtk_button_new_with_label(get_Company(0).name);
+                    gtk_fixed_put(GTK_FIXED(World_container),Company0, 100,100);
 
+                    //evento
+                    g_signal_connect(G_OBJECT(Company0), "clicked", 
+                            (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                }
+                {
+                    //bottone
+                    GtkWidget *Company1;
+                    Company1 = gtk_button_new_with_label(get_Company(1).name);
+                    gtk_fixed_put(GTK_FIXED(World_container),Company1, 100,170);
+
+                    //evento
+                    g_signal_connect(G_OBJECT(Company1), "clicked", 
+                            (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                }
+                {
+                    //bottone
+                    GtkWidget *Company2;
+                    Company2 = gtk_button_new_with_label(get_Company(2).name);
+                    gtk_fixed_put(GTK_FIXED(World_container),Company2, 100,240);
+
+                    //evento
+                    g_signal_connect(G_OBJECT(Company2), "clicked", 
+                            (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                }
+                {
+                    //bottone
+                    GtkWidget *Company3;
+                    Company3 = gtk_button_new_with_label(get_Company(3).name);
+                    gtk_fixed_put(GTK_FIXED(World_container),Company3, 400,100);
+
+                    //evento
+                    g_signal_connect(G_OBJECT(Company3), "clicked", 
+                            (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                }
+                {
+                    //bottone
+                    GtkWidget *Company4;
+                    Company4 = gtk_button_new_with_label(get_Company(4).name);
+                    gtk_fixed_put(GTK_FIXED(World_container),Company4, 400,170);
+
+                    //evento
+                    g_signal_connect(G_OBJECT(Company4), "clicked", 
+                            (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                }
+                {
+                    //bottone
+                    GtkWidget *Company5;
+                    Company5 = gtk_button_new_with_label(get_Company(5).name);
+                    gtk_fixed_put(GTK_FIXED(World_container),Company5, 400,240);
+
+                    //evento
+                    g_signal_connect(G_OBJECT(Company5), "clicked", 
+                            (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                }
             }
         }
         

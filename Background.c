@@ -3,6 +3,7 @@
  */
 #include "Background.h"
 #include <string.h>
+#include <stdio.h>
 
 static Company Company0,Company1,Company2,Company3,Company4,Company5;
 
@@ -13,33 +14,58 @@ void init_company(){
         int n;
         for(n=0;n<=15;n++){
             Company0.x[n]=n;
-            Company0.y[n]=1;
+            Company0.y[n]=n;
         }
         Company0.found = 150000;
     }
     {
         Company1.name = "La fattoria di Giuseppina";
         Company1.type = sapa;
+        int n;
+        for(n=0;n<=14;n++){
+            Company0.x[n]=n;
+            Company0.y[n]=n;
+        }
         Company1.found = 30000;
     }
     {
         Company2.name = "Abstergo";
         Company2.type = srl;
+        int n;
+        for(n=0;n<=14;n++){
+            Company0.x[n]=n;
+            Company0.y[n]=n;
+        }
         Company2.found = 1700000;
     }
     {
         Company3.name = "Aperture";
         Company3.type = srls;
+        int n;
+        for(n=0;n<=14;n++){
+            Company0.x[n]=n;
+            Company0.y[n]=n;
+        }
         Company3.found = 5000000;
     }
     {
         Company4.name = "I demolitori di vecchi\n e adorati ricordi";
         Company4.type = spa;
+        int n;
+        for(n=0;n<=14;n++){
+            Company0.x[n]=n;
+            Company0.y[n]=n;
+        }
         Company4.found = 125000; 
     }
     {
         Company5.name = "Non siamo la NASA";
         Company5.type = spa;
+        int n;
+        for(n=0;n<=14;n++){
+            Company0.x[n]=n;
+            Company0.y[n]=n;
+        }
         Company5.found = 10000;
     }
 }
@@ -78,15 +104,22 @@ Company get_Company(int n){
         printf("Company selezionata non esistente\n");
 }
 
-void update(){}
+void update(){
+    
+}
+
+char* found2Text(float found){
+    char str[12];
+    snprintf(str, sizeof(str), "%f", found);
+    //sprintf(str,"%f",found);
+    return str;
+}
 
 /*
  * Le righe seguenti servono a convertire il type in una stringa
  * Creiamo una stuttura per le associazioni
  */ 
-
-typedef struct
-{
+typedef struct{
     society val;
     char *val_name;
 } type_TxtMap;
@@ -107,8 +140,8 @@ char* type2Text(society val){
     {
         if (type_list[n].val == val)
             return type_list[n].val_name;
-    }//for
- 
+    }
+
     return ("!!invalid type val!!");
 }
     

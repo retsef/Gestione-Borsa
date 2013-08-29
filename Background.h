@@ -6,6 +6,7 @@
  */
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
+
 #include <stdlib.h>
 
 typedef enum {spa,sapa,srl,srls} society;
@@ -25,6 +26,7 @@ Company get_Company_by_name(const char* name);
 Company get_Company(int n);
 void update();
 
+char* found2Text(float found);
 char* type2Text(society val);
 
 #endif

@@ -104,13 +104,15 @@ GtkWidget * create_company_frame(Company Company_n){
         gtk_frame_set_shadow_type(GTK_FRAME(Company_frame_info), GTK_SHADOW_IN);
         
         GtkWidget *Company_info_container = gtk_fixed_new();
-        GtkWidget *Company_info_template = gtk_label_new("Nome:\nTipo:\n");
+        GtkWidget *Company_info_template = gtk_label_new("Nome:\nTipo:\nFound:");
         GtkWidget *Company_info_name = gtk_label_new(Company_n.name);
         GtkWidget *Company_info_type = gtk_label_new(type2Text(Company_n.type));
+        GtkWidget *Company_info_found = gtk_label_new(found2Text(Company_n.found));
 
         gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_template,5,1);
         gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_name,50,1);
         gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_type,50,15);
+        gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_found,50,31);
 
         gtk_container_add(GTK_CONTAINER(Company_frame_info),Company_info_container);
         gtk_widget_set_size_request(Company_frame_info,350,80);
@@ -133,4 +135,5 @@ void create_company_tab(GtkButton *button, GtkWidget *notebook){
                 
     gtk_notebook_insert_page(GTK_NOTEBOOK(notebook), Company0_frame, Company0_label,1);
     gtk_widget_show_all(notebook);
+    gtk_notebook_set_current_page(notebook,1);
 }
