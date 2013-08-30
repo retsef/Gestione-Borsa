@@ -128,7 +128,7 @@ GtkWidget * create_company_frame(Company Company_n){
     
     return Company_frame;
 }
-
+//create a company tab and get specic company from button label
 void create_company_tab(GtkButton *button, GtkWidget *notebook){
     
     GtkWidget *Company0_label = create_notebook_label(get_Company_by_name(gtk_button_get_label(button)).name, GTK_NOTEBOOK(notebook),TRUE, 1);
