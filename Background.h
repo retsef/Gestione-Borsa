@@ -8,6 +8,8 @@
 #define BACKGROUND_H
 
 #include <stdlib.h>
+#include <stdbool.h>
+#define POINTS 100
 
 typedef enum {spa,sapa,srl,srls} society;
 
@@ -15,8 +17,8 @@ typedef struct{
     char* name;
     society type;
     float found;
-    float x[15];
-    float y[15];
+    float x[POINTS];
+    float y[POINTS];
 }Company;
 
 //typedef struct Company Company;
@@ -24,7 +26,7 @@ typedef struct{
 void init_company();
 Company get_Company_by_name(const char* name);
 Company get_Company(int n);
-void update();
+bool update();
 
 char* found2Text(float found);
 char* type2Text(society val);

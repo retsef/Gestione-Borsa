@@ -228,6 +228,12 @@ main( int argc, char *argv[]){
     g_signal_connect(window, "destroy", 
       G_CALLBACK (gtk_main_quit), NULL);
     
+     /*--------------------------------------------------------
+    * set function update_graph to be called whenever 
+    * the program is idle
+    *------------------------------------------------------*/
+    g_idle_add_full(G_PRIORITY_HIGH_IDLE+21, (GSourceFunc)update, (gpointer) window, NULL);
+    
     /* Manda la window in loop in attesa di un nuovo evento*/
     gtk_main();
     

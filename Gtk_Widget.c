@@ -83,8 +83,9 @@ GtkWidget * create_graph_with_rules(gfloat *x, gfloat *y, int graph_lenght){
     
     //gtk_box_pack_start(GTK_BOX(container), databoxcontainer, 1, 1, 0 );
     
-    gtk_databox_create_box_with_scrollbars_and_rulers (
-        &databox, &databoxcontainer, FALSE, FALSE, TRUE, TRUE);
+    gtk_databox_create_box_with_scrollbars_and_rulers(
+        &databox, &databoxcontainer, 
+            FALSE, FALSE, TRUE, TRUE);
 
     GdkColor markerColor = { 0, 65000, 0, 0 };
     graph = gtk_databox_lines_new(graph_lenght, x, y, &markerColor, 1);
@@ -118,7 +119,7 @@ GtkWidget * create_company_frame(Company Company_n){
         gtk_widget_set_size_request(Company_frame_info,350,80);
         gtk_fixed_put(GTK_FIXED(Company_container),Company_frame_info,5,5);
     }   
-    GtkWidget *Company_graph = create_graph_with_rules(Company_n.x,Company_n.y,(sizeof(Company_n.y)/sizeof(*Company_n.y)));
+    GtkWidget *Company_graph = create_graph_with_rules(Company_n.x,Company_n.y, POINTS );
 
     gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,105);
     gtk_widget_set_size_request(Company_graph,680,320);
@@ -135,5 +136,6 @@ void create_company_tab(GtkButton *button, GtkWidget *notebook){
                 
     gtk_notebook_insert_page(GTK_NOTEBOOK(notebook), Company0_frame, Company0_label,1);
     gtk_widget_show_all(notebook);
-    gtk_notebook_set_current_page(notebook,1);
+    
+    gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook),1);
 }

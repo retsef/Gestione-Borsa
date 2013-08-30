@@ -4,6 +4,8 @@
 #include "Background.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
 
 static Company Company0,Company1,Company2,Company3,Company4,Company5;
 
@@ -12,18 +14,26 @@ void init_company(){
         Company0.name = "Pincopallino industries";
         Company0.type = spa;
         int n;
-        for(n=0;n<=15;n++){
+        for(n=0;n<POINTS;n++){
             Company0.x[n]=n;
+        }
+        for(n=0;n<POINTS;n++){
             Company0.y[n]=n;
         }
+        for(n=0;n<POINTS;n++){
+            printf("%d,%d\n",n,Company0.y[n]);
+        }
+        
         Company0.found = 150000;
     }
     {
         Company1.name = "La fattoria di Giuseppina";
         Company1.type = sapa;
         int n;
-        for(n=0;n<=14;n++){
+        for(n=0;n<POINTS;n++){
             Company0.x[n]=n;
+        }
+        for(n=0;n<POINTS;n++){
             Company0.y[n]=n;
         }
         Company1.found = 30000;
@@ -32,8 +42,10 @@ void init_company(){
         Company2.name = "Abstergo";
         Company2.type = srl;
         int n;
-        for(n=0;n<=14;n++){
+        for(n=0;n<POINTS;n++){
             Company0.x[n]=n;
+        }
+        for(n=0;n<POINTS;n++){
             Company0.y[n]=n;
         }
         Company2.found = 1700000;
@@ -42,8 +54,10 @@ void init_company(){
         Company3.name = "Aperture";
         Company3.type = srls;
         int n;
-        for(n=0;n<=14;n++){
+        for(n=0;n<POINTS;n++){
             Company0.x[n]=n;
+        }
+        for(n=0;n<POINTS;n++){
             Company0.y[n]=n;
         }
         Company3.found = 5000000;
@@ -52,8 +66,10 @@ void init_company(){
         Company4.name = "I demolitori di vecchi\n e adorati ricordi";
         Company4.type = spa;
         int n;
-        for(n=0;n<=14;n++){
+        for(n=0;n<POINTS;n++){
             Company0.x[n]=n;
+        }
+        for(n=0;n<POINTS;n++){
             Company0.y[n]=n;
         }
         Company4.found = 125000; 
@@ -62,8 +78,10 @@ void init_company(){
         Company5.name = "Non siamo la NASA";
         Company5.type = spa;
         int n;
-        for(n=0;n<=14;n++){
+        for(n=0;n<POINTS;n++){
             Company0.x[n]=n;
+        }
+        for(n=0;n<POINTS;n++){
             Company0.y[n]=n;
         }
         Company5.found = 10000;
@@ -104,14 +122,17 @@ Company get_Company(int n){
         printf("Company selezionata non esistente\n");
 }
 
-void update(){
-    
+bool update(){
+    int n;/*
+    for(n=5;n<20;n++){
+            Company0.y[n]= rand() % 20;
+        }*/
+    return true;
 }
 
 char* found2Text(float found){
     char str[12];
     snprintf(str, sizeof(str), "%f", found);
-    //sprintf(str,"%f",found);
     return str;
 }
 
