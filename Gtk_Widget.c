@@ -3,8 +3,8 @@
 #include <stdbool.h>
 #include <gtk/gtk.h>
 #include <gtkdatabox.h>
+#include <gtkdatabox_points.h>
 #include <gtkdatabox_ruler.h>
-#include <gtkdatabox_lines.h>
 
 /**
  * Crea un tab per il notebook avente il bottone di chiusura

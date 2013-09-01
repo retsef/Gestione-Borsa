@@ -65,6 +65,7 @@
           </incDir>
         </cTool>
         <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestione-borsa</output>
           <linkerLibItems>
             <linkerLibLibItem>gtk-x11-2.0</linkerLibLibItem>
             <linkerLibLibItem>gdk-x11-2.0</linkerLibLibItem>

@@ -11,9 +11,6 @@
 #include <math.h>
 
 #include <gtk/gtk.h>
-#include <gtkdatabox.h>
-#include <gtkdatabox_ruler.h>
-#include <gtkdatabox_lines.h>
 
 #include "Gtk_Widget.h"
 #include "Background.h"
