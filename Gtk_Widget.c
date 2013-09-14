@@ -129,13 +129,13 @@ GtkWidget * create_company_frame(Company Company_n){
     return Company_frame;
 }
 
-void create_company_tab(GtkButton *button, GtkWidget *notebook){
-    
+void create_company_tab(GtkButton *button, Data_notebook *data){
+    /*
     GtkWidget *Company0_label = create_notebook_label(get_Company_by_name(gtk_button_get_label(button)).name, GTK_NOTEBOOK(notebook),TRUE, 1);
     GtkWidget *Company0_frame = create_company_frame(get_Company_by_name(gtk_button_get_label(button)));
-                
-    gtk_notebook_insert_page(GTK_NOTEBOOK(notebook), Company0_frame, Company0_label,1);
-    gtk_widget_show_all(notebook);
+       */         
+    gtk_notebook_insert_page(GTK_NOTEBOOK(data->notebook), data->frame, data->label,1);
+    gtk_widget_show_all(data->notebook);
     
-    gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook),1);
+    gtk_notebook_set_current_page(GTK_NOTEBOOK(data->notebook),1);
 }

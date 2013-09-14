@@ -23,8 +23,9 @@ typedef struct{
 }Company;
 
 typedef struct{
-    GtkWidget notebook;
-    GtkWidget frame;
+    GtkWidget *label;
+    GtkWidget *notebook;
+    GtkWidget *frame;
 }Data_notebook;
 
 void init_company();

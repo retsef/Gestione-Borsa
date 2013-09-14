@@ -20,11 +20,11 @@ void init_company(){
         for(n=0;n<POINTS;n++){
             Company0.y[n]=n;
         }
+        Company0.y[5]=10;
         /*
         for(n=0;n<POINTS;n++){
             printf("%d,%d\n",n,Company0.y[n]);
         }*/
-        
         Company0.found = 150000;
     }
     {
@@ -37,6 +37,7 @@ void init_company(){
         for(n=0;n<POINTS;n++){
             Company1.y[n]=n;
         }
+        Company1.y[5]=3;
         Company1.found = 30000;
     }
     {

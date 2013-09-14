@@ -56,7 +56,6 @@ main( int argc, char *argv[]){
     
     GtkWidget *window; //finestra principale
     GtkWidget *about; //finestra di about
-    
     GtkWidget *fixed; //griglia per posizionare i widget
     
     GtkWidget *notebook;
@@ -130,16 +129,15 @@ main( int argc, char *argv[]){
                     GtkWidget *Company0_label = create_notebook_label(get_Company(0).name, GTK_NOTEBOOK(notebook),TRUE, 1);
                     GtkWidget *Company0_frame = create_company_frame(get_Company(0));
 
-                    gtk_notebook_insert_page(GTK_NOTEBOOK(notebook), Company0_frame, Company0_label,1);
-                    gtk_widget_show_all(notebook);
-
-                    gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook),1);
-                    
+                    //questra struttura serve a passare multipli oggetti all'evento
+                    Data_notebook *data0 = malloc(sizeof(*data0));
+                    data0->notebook = notebook;
+                    data0->frame = Company0_frame;
+                    data0->label = Company0_label;
                     //evento
-                    /*
                     g_signal_connect(G_OBJECT(Company0), "clicked", 
-                            (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
-                    */
+                            (GtkSignalFunc)create_company_tab, data0);
+                    
                 }
                 {
                     //bottone
@@ -147,9 +145,17 @@ main( int argc, char *argv[]){
                     Company1 = gtk_button_new_with_label(get_Company(1).name);
                     gtk_fixed_put(GTK_FIXED(World_container),Company1, 100,170);
 
+                    GtkWidget *Company1_label = create_notebook_label(get_Company(1).name, GTK_NOTEBOOK(notebook),TRUE, 1);
+                    GtkWidget *Company1_frame = create_company_frame(get_Company(1));
+
+                    //questra struttura serve a passare multipli oggetti all'evento
+                    Data_notebook *data1 = malloc(sizeof(*data1));
+                    data1->notebook = notebook;
+                    data1->frame = Company1_frame;
+                    data1->label = Company1_label;
                     //evento
                     g_signal_connect(G_OBJECT(Company1), "clicked", 
-                            (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                            (GtkSignalFunc)create_company_tab, data1);
                 }
                 {
                     //bottone
@@ -157,9 +163,17 @@ main( int argc, char *argv[]){
                     Company2 = gtk_button_new_with_label(get_Company(2).name);
                     gtk_fixed_put(GTK_FIXED(World_container),Company2, 100,240);
 
+                    GtkWidget *Company2_label = create_notebook_label(get_Company(2).name, GTK_NOTEBOOK(notebook),TRUE, 1);
+                    GtkWidget *Company2_frame = create_company_frame(get_Company(2));
+
+                    //questra struttura serve a passare multipli oggetti all'evento
+                    Data_notebook *data2 = malloc(sizeof(*data2));
+                    data2->notebook = notebook;
+                    data2->frame = Company2_frame;
+                    data2->label = Company2_label;
                     //evento
                     g_signal_connect(G_OBJECT(Company2), "clicked", 
-                            (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                            (GtkSignalFunc)create_company_tab, data2);
                 }
                 {
                     //bottone
@@ -167,9 +181,17 @@ main( int argc, char *argv[]){
                     Company3 = gtk_button_new_with_label(get_Company(3).name);
                     gtk_fixed_put(GTK_FIXED(World_container),Company3, 400,100);
 
+                    GtkWidget *Company3_label = create_notebook_label(get_Company(3).name, GTK_NOTEBOOK(notebook),TRUE, 1);
+                    GtkWidget *Company3_frame = create_company_frame(get_Company(3));
+
+                    //questra struttura serve a passare multipli oggetti all'evento
+                    Data_notebook *data3 = malloc(sizeof(*data3));
+                    data3->notebook = notebook;
+                    data3->frame = Company3_frame;
+                    data3->label = Company3_label;
                     //evento
                     g_signal_connect(G_OBJECT(Company3), "clicked", 
-                            (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                            (GtkSignalFunc)create_company_tab, data3);
                 }
                 {
                     //bottone
@@ -177,9 +199,17 @@ main( int argc, char *argv[]){
                     Company4 = gtk_button_new_with_label(get_Company(4).name);
                     gtk_fixed_put(GTK_FIXED(World_container),Company4, 400,170);
 
+                    GtkWidget *Company4_label = create_notebook_label(get_Company(4).name, GTK_NOTEBOOK(notebook),TRUE, 1);
+                    GtkWidget *Company4_frame = create_company_frame(get_Company(4));
+
+                    //questra struttura serve a passare multipli oggetti all'evento
+                    Data_notebook *data4 = malloc(sizeof(*data4));
+                    data4->notebook = notebook;
+                    data4->frame = Company4_frame;
+                    data4->label = Company4_label;
                     //evento
                     g_signal_connect(G_OBJECT(Company4), "clicked", 
-                            (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                            (GtkSignalFunc)create_company_tab, data4);
                 }
                 {
                     //bottone
@@ -187,9 +217,17 @@ main( int argc, char *argv[]){
                     Company5 = gtk_button_new_with_label(get_Company(5).name);
                     gtk_fixed_put(GTK_FIXED(World_container),Company5, 400,240);
 
+                    GtkWidget *Company5_label = create_notebook_label(get_Company(5).name, GTK_NOTEBOOK(notebook),TRUE, 1);
+                    GtkWidget *Company5_frame = create_company_frame(get_Company(5));
+
+                    //questra struttura serve a passare multipli oggetti all'evento
+                    Data_notebook *data5 = malloc(sizeof(*data5));
+                    data5->notebook = notebook;
+                    data5->frame = Company5_frame;
+                    data5->label = Company5_label;
                     //evento
                     g_signal_connect(G_OBJECT(Company5), "clicked", 
-                            (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                            (GtkSignalFunc)create_company_tab, data5);
                 }
             }
         }
