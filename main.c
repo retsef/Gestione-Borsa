@@ -67,6 +67,9 @@ main( int argc, char *argv[]){
      */
     gtk_init(&argc, &argv);
     
+    //inizializziamo i dati delle company
+    init_company();
+    
     /*
      * Creiamo un GtkWindow di tipo widget. 
      * La window e' di tipo GTK_WINDOW_TOPLEVEL.
@@ -117,17 +120,26 @@ main( int argc, char *argv[]){
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), World_frame, World_label);
             
             {   
-                //company
-                init_company();
+                
                 {
                     //bottone
                     GtkWidget *Company0;
                     Company0 = gtk_button_new_with_label(get_Company(0).name);
                     gtk_fixed_put(GTK_FIXED(World_container),Company0, 100,100);
 
+                    GtkWidget *Company0_label = create_notebook_label(get_Company(0).name, GTK_NOTEBOOK(notebook),TRUE, 1);
+                    GtkWidget *Company0_frame = create_company_frame(get_Company(0));
+
+                    gtk_notebook_insert_page(GTK_NOTEBOOK(notebook), Company0_frame, Company0_label,1);
+                    gtk_widget_show_all(notebook);
+
+                    gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook),1);
+                    
                     //evento
+                    /*
                     g_signal_connect(G_OBJECT(Company0), "clicked", 
                             (GtkSignalFunc)create_company_tab, GTK_OBJECT(notebook));
+                    */
                 }
                 {
                     //bottone

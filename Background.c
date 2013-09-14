@@ -20,9 +20,10 @@ void init_company(){
         for(n=0;n<POINTS;n++){
             Company0.y[n]=n;
         }
+        /*
         for(n=0;n<POINTS;n++){
             printf("%d,%d\n",n,Company0.y[n]);
-        }
+        }*/
         
         Company0.found = 150000;
     }
@@ -31,10 +32,10 @@ void init_company(){
         Company1.type = sapa;
         int n;
         for(n=0;n<POINTS;n++){
-            Company0.x[n]=n;
+            Company1.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company0.y[n]=n;
+            Company1.y[n]=n;
         }
         Company1.found = 30000;
     }
@@ -43,10 +44,10 @@ void init_company(){
         Company2.type = srl;
         int n;
         for(n=0;n<POINTS;n++){
-            Company0.x[n]=n;
+            Company2.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company0.y[n]=n;
+            Company2.y[n]=n;
         }
         Company2.found = 1700000;
     }
@@ -55,10 +56,10 @@ void init_company(){
         Company3.type = srls;
         int n;
         for(n=0;n<POINTS;n++){
-            Company0.x[n]=n;
+            Company3.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company0.y[n]=n;
+            Company3.y[n]=n;
         }
         Company3.found = 5000000;
     }
@@ -67,10 +68,10 @@ void init_company(){
         Company4.type = spa;
         int n;
         for(n=0;n<POINTS;n++){
-            Company0.x[n]=n;
+            Company4.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company0.y[n]=n;
+            Company4.y[n]=n;
         }
         Company4.found = 125000; 
     }
@@ -79,10 +80,10 @@ void init_company(){
         Company5.type = spa;
         int n;
         for(n=0;n<POINTS;n++){
-            Company0.x[n]=n;
+            Company5.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company0.y[n]=n;
+            Company5.y[n]=n;
         }
         Company5.found = 10000;
     }

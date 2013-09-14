@@ -7,9 +7,10 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
+#include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#define POINTS 100
+#define POINTS 20
 
 typedef enum {spa,sapa,srl,srls} society;
 
@@ -21,7 +22,10 @@ typedef struct{
     float y[POINTS];
 }Company;
 
-//typedef struct Company Company;
+typedef struct{
+    GtkWidget notebook;
+    GtkWidget frame;
+}Data_notebook;
 
 void init_company();
 Company get_Company_by_name(const char* name);
