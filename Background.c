@@ -7,7 +7,13 @@
 #include <stdbool.h>
 #include <math.h>
 
-static Company Company0,Company1,Company2,Company3,Company4,Company5;
+Data_notebook *new_data_notebook(){
+    Data_notebook *data;
+    data=malloc(sizeof(Data_notebook));
+    return data;
+}
+
+Company Company0,Company1,Company2,Company3,Company4,Company5;
 
 void init_company(){
     {
@@ -20,11 +26,12 @@ void init_company(){
         for(n=0;n<POINTS;n++){
             Company0.y[n]=n;
         }
-        Company0.y[5]=10;
+        Company0.y[3]=5;
         /*
         for(n=0;n<POINTS;n++){
             printf("%d,%d\n",n,Company0.y[n]);
         }*/
+        
         Company0.found = 150000;
     }
     {
@@ -37,7 +44,6 @@ void init_company(){
         for(n=0;n<POINTS;n++){
             Company1.y[n]=n;
         }
-        Company1.y[5]=3;
         Company1.found = 30000;
     }
     {
@@ -86,6 +92,9 @@ void init_company(){
         for(n=0;n<POINTS;n++){
             Company5.y[n]=n;
         }
+        Company5.y[4]=7;
+        Company5.y[6]=1;
+        
         Company5.found = 10000;
     }
 }
