@@ -126,13 +126,13 @@ main( int argc, char *argv[]){
                     gtk_fixed_put(GTK_FIXED(World_container),Company0_button, 100,100);
                     
                     //need fix
-                    //float post_x[] = get_Company(0).x;
-                    //float post_y[] = get_Company(0).y;
+                    //float *post_x = get_Company(0).x;
+                    //float *post_y = get_Company(0).y;
                     
-                    //GtkWidget *Company0_graph = create_graph_with_rules(post_x, post_y, POINTS );
+                    GtkWidget *Company0_graph = create_graph_with_rules(get_Company_pointer(0)->x,get_Company_pointer(0)->y, POINTS );
                     GtkWidget *Company0_label = create_notebook_label(get_Company(0).name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    //GtkWidget *Company0_frame = create_company_frame_graph(get_Company(0),Company0_graph);
-                    GtkWidget *Company0_frame = create_company_frame(get_Company(0));
+                    GtkWidget *Company0_frame = create_company_frame_graph(get_Company(0),Company0_graph);
+                    //GtkWidget *Company0_frame = create_company_frame(get_Company(0));
                     /*
                     gtk_notebook_insert_page(GTK_NOTEBOOK(notebook), Company0_frame, Company0_label,1);
                     gtk_widget_show_all(notebook);
@@ -162,11 +162,12 @@ main( int argc, char *argv[]){
                     Company1_button = gtk_button_new_with_label(get_Company(1).name);
                     gtk_fixed_put(GTK_FIXED(World_container),Company1_button, 100,170);
                     
+                    GtkWidget *Company1_graph = create_graph_with_rules(get_Company_pointer(1)->x,get_Company_pointer(1)->y, POINTS );
                     GtkWidget *Company1_label = create_notebook_label(get_Company(1).name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    //GtkWidget *Company1_frame = create_company_frame(get_Company(1));
+                    GtkWidget *Company1_frame = create_company_frame_graph(get_Company(1),Company1_graph);
                     
                     GtkWidget *data1[3];
-                    //data1[0] = Company1_frame;
+                    data1[0] = Company1_frame;
                     data1[1] = Company1_label;
                     data1[2] = notebook;
                     
@@ -179,76 +180,100 @@ main( int argc, char *argv[]){
                     GtkWidget *Company2_button;
                     Company2_button = gtk_button_new_with_label(get_Company(2).name);
                     gtk_fixed_put(GTK_FIXED(World_container),Company2_button, 100,240);
-                    /*
-                    GtkWidget *Company2_label = create_notebook_label(get_Company(2).name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company2_frame = create_company_frame(get_Company(2));
                     
+                    GtkWidget *Company2_graph = create_graph_with_rules(get_Company_pointer(2)->x,get_Company_pointer(2)->y, POINTS );
+                    GtkWidget *Company2_label = create_notebook_label(get_Company(2).name, GTK_NOTEBOOK(notebook),TRUE, 1);
+                    GtkWidget *Company2_frame = create_company_frame_graph(get_Company(2),Company2_graph);
+                    /*
                     Data_notebook *data2 = new_data_notebook();
                     
                     data2->frame = Company2_frame;
                     data2->label = Company2_label;
                     data2->notebook = notebook;
                     */
+                    GtkWidget *data2[3];
+                    data2[0] = Company2_frame;
+                    data2[1] = Company2_label;
+                    data2[2] = notebook;
+                    
                     //evento
                     g_signal_connect(G_OBJECT(Company2_button), "clicked", 
-                        (GtkSignalFunc)create_company_tab, notebook);
+                        (GtkSignalFunc)create_company_tab, data2);
                 }
                 {
                     //bottone
                     GtkWidget *Company3_button;
                     Company3_button = gtk_button_new_with_label(get_Company(3).name);
                     gtk_fixed_put(GTK_FIXED(World_container),Company3_button, 400,100);
-                    /*
-                    GtkWidget *Company3_label = create_notebook_label(get_Company(3).name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company3_frame = create_company_frame(get_Company(3));
                     
+                    GtkWidget *Company3_graph = create_graph_with_rules(get_Company_pointer(3)->x,get_Company_pointer(3)->y, POINTS );
+                    GtkWidget *Company3_label = create_notebook_label(get_Company(3).name, GTK_NOTEBOOK(notebook),TRUE, 1);
+                    GtkWidget *Company3_frame = create_company_frame_graph(get_Company(3),Company3_graph);
+                    /*
                     Data_notebook *data3 = new_data_notebook();
                     
                     data3->frame = Company3_frame;
                     data3->label = Company3_label;
                     data3->notebook = notebook;
                     */
+                    GtkWidget *data3[3];
+                    data3[0] = Company3_frame;
+                    data3[1] = Company3_label;
+                    data3[2] = notebook;
+                    
                     //evento
                     g_signal_connect(G_OBJECT(Company3_button), "clicked", 
-                        (GtkSignalFunc)create_company_tab, notebook);
+                        (GtkSignalFunc)create_company_tab, data3);
                 }
                 {
                     //bottone
                     GtkWidget *Company4_button;
                     Company4_button = gtk_button_new_with_label(get_Company(4).name);
                     gtk_fixed_put(GTK_FIXED(World_container),Company4_button, 400,170);
-                    /*
-                    GtkWidget *Company4_label = create_notebook_label(get_Company(4).name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company4_frame = create_company_frame(get_Company(4));
                     
+                    GtkWidget *Company4_graph = create_graph_with_rules(get_Company_pointer(4)->x,get_Company_pointer(4)->y, POINTS );
+                    GtkWidget *Company4_label = create_notebook_label(get_Company(4).name, GTK_NOTEBOOK(notebook),TRUE, 1);
+                    GtkWidget *Company4_frame = create_company_frame_graph(get_Company(4),Company4_graph);
+                    /*
                     Data_notebook *data4 = new_data_notebook();
                     
                     data4->frame = Company4_frame;
                     data4->label = Company4_label;
                     data4->notebook = notebook;
                     */
+                    GtkWidget *data4[3];
+                    data4[0] = Company4_frame;
+                    data4[1] = Company4_label;
+                    data4[2] = notebook;
+                    
                     //evento
                     g_signal_connect(G_OBJECT(Company4_button), "clicked", 
-                        (GtkSignalFunc)create_company_tab, notebook);
+                        (GtkSignalFunc)create_company_tab, data4);
                 }
                 {
                     //bottone
                     GtkWidget *Company5_button;
                     Company5_button = gtk_button_new_with_label(get_Company(5).name);
                     gtk_fixed_put(GTK_FIXED(World_container),Company5_button, 400,240);
-                    /*
-                    GtkWidget *Company5_label = create_notebook_label(get_Company(5).name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company5_frame = create_company_frame(get_Company(5));
                     
+                    GtkWidget *Company5_graph = create_graph_with_rules(get_Company_pointer(5)->x,get_Company_pointer(5)->y, POINTS );
+                    GtkWidget *Company5_label = create_notebook_label(get_Company(5).name, GTK_NOTEBOOK(notebook),TRUE, 1);
+                    GtkWidget *Company5_frame = create_company_frame_graph(get_Company(5),Company5_graph);
+                    /*
                     Data_notebook *data5 = new_data_notebook();
                     
                     data5->frame = Company5_frame;
                     data5->label = Company5_label;
                     data5->notebook = notebook;
                     */
+                    GtkWidget *data5[3];
+                    data5[0] = Company5_frame;
+                    data5[1] = Company5_label;
+                    data5[2] = notebook;
+                    
                     //evento
                     g_signal_connect(G_OBJECT(Company5_button), "clicked", 
-                        (GtkSignalFunc)create_company_tab, notebook);
+                        (GtkSignalFunc)create_company_tab, data5);
                 }
             }
         }

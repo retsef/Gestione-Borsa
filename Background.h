@@ -14,6 +14,8 @@
 
 typedef enum {spa,sapa,srl,srls} society;
 
+typedef float Money;
+
 typedef struct{
     char* name;
     society type;
@@ -21,6 +23,13 @@ typedef struct{
     float x[POINTS];
     float y[POINTS];
 }Company;
+
+typedef struct{
+    float action;
+    Money wallet;
+}User;
+
+
 
 typedef struct{
     GtkWidget *label;
@@ -31,7 +40,11 @@ typedef struct{
 void init_company();
 Company get_Company_by_name(const char* name);
 Company get_Company(int n);
+Company* get_Company_pointer(int n);
+
 bool update();
+void Buy(GtkButton *button);
+void Sell(GtkButton *button);
 
 char* found2Text(float found);
 char* type2Text(society val);

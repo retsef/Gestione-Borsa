@@ -17,6 +17,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="images" displayName="images" projectFiles="true">
+        <itemPath>images/bancomat.png</itemPath>
         <itemPath>images/gtk-banner.png</itemPath>
         <itemPath>images/money.png</itemPath>
         <itemPath>images/world_red_cntry_globe_hammer.gi.gif</itemPath>
@@ -102,6 +103,8 @@
       </item>
       <item path="gpl-2.0.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="images/bancomat.png" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="images/gtk-banner.png" ex="false" tool="3" flavor2="0">
       </item>
       <item path="images/money.png" ex="false" tool="3" flavor2="0">
@@ -146,6 +149,8 @@
       <item path="Gtk_Widget.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="gpl-2.0.txt" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="images/bancomat.png" ex="false" tool="3" flavor2="0">
       </item>
       <item path="images/gtk-banner.png" ex="false" tool="3" flavor2="0">
       </item>

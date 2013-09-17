@@ -160,6 +160,11 @@ GtkWidget * create_company_frame(Company Company_n){
         gtk_widget_set_usize(GTK_WIDGET(Buy_button),180,40);
         gtk_widget_set_usize(GTK_WIDGET(Sell_button),180,40);
         
+        g_signal_connect(G_OBJECT(Buy_button), "Buy", 
+                        G_CALLBACK(Buy), NULL);
+        g_signal_connect(G_OBJECT(Sell_button), "Sell", 
+                        G_CALLBACK(Sell), NULL);
+        
         gtk_fixed_put(GTK_FIXED(Company_container),Buy_button, 430,5);
         gtk_fixed_put(GTK_FIXED(Company_container),Sell_button, 430,45);
         

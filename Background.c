@@ -26,7 +26,15 @@ void init_company(){
         for(n=0;n<POINTS;n++){
             Company0.y[n]=n;
         }
+        Company0.y[0]=12;
         Company0.y[3]=5;
+        Company0.y[5]=7;
+        Company0.y[6]=-2;
+        Company0.y[9]=11;
+        Company0.y[10]=10.5;
+        Company0.y[11]=2;
+        Company0.y[12]=4;
+        Company0.y[14]=1;
         /*
         for(n=0;n<POINTS;n++){
             printf("%d,%d\n",n,Company0.y[n]);
@@ -133,12 +141,62 @@ Company get_Company(int n){
         printf("Company selezionata non esistente\n");
 }
 
+Company* get_Company_pointer(int n){
+    if (n==0)
+       return &Company0;
+    else if (n==1)
+        return &Company1;
+    else if (n==2)
+        return &Company2;
+    else if (n==3)
+        return &Company3;
+    else if (n==4)
+        return &Company4;
+    else if (n==5)
+        return &Company5;
+    else
+        printf("Company selezionata non esistente\n");
+}
+
 bool update(){
     int n;/*
     for(n=5;n<20;n++){
             Company0.y[n]= rand() % 20;
         }*/
     return true;
+}
+
+void Buy(GtkButton *button){
+
+    GtkWidget *Buy_window;
+    GtkWidget *Buy_container;
+
+    GtkWidget *User_found;
+    GtkWidget *Description;
+
+    GtkWidget *Input;
+
+    Buy_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_position(GTK_WINDOW(Buy_window), GTK_WIN_POS_CENTER);
+    gtk_window_set_title(GTK_WINDOW(Buy_window), "Buy");
+    gtk_container_set_border_width(GTK_CONTAINER(Buy_window), 10);
+    
+    Buy_container = gtk_fixed_new();
+    gtk_container_add(GTK_CONTAINER(Buy_window), Buy_container);
+
+    Description = gtk_label_new("Inserisci il valore che vuoi versare");
+    gtk_fixed_put(GTK_FIXED(Buy_container),GTK_WIDGET(Description),0,0);
+
+
+    Input = gtk_entry_new();
+    gtk_fixed_put(GTK_FIXED(Buy_container),GTK_WIDGET(Input),0,30);
+
+    gtk_widget_show_all(Buy_window);
+    
+}
+
+void Sell(GtkButton *button){
+    
 }
 
 char* found2Text(float found){
