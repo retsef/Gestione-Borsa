@@ -39,8 +39,7 @@ typedef struct{
 
 void init_company();
 Company get_Company_by_name(const char* name);
-Company get_Company(int n);
-Company* get_Company_pointer(int n);
+Company* get_Company(int n);
 
 bool update();
 void Buy(GtkButton *button);

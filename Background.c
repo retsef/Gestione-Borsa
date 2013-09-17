@@ -124,24 +124,7 @@ Company get_Company_by_name(const char* name){
         printf("\nNon esiste una Company con quel nome\n");
 }
 
-Company get_Company(int n){
-    if (n==0)
-       return Company0;
-    else if (n==1)
-        return Company1;
-    else if (n==2)
-        return Company2;
-    else if (n==3)
-        return Company3;
-    else if (n==4)
-        return Company4;
-    else if (n==5)
-        return Company5;
-    else
-        printf("Company selezionata non esistente\n");
-}
-
-Company* get_Company_pointer(int n){
+Company* get_Company(int n){
     if (n==0)
        return &Company0;
     else if (n==1)
