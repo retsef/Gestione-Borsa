@@ -153,6 +153,16 @@ GtkWidget * create_company_frame(Company Company_n){
         gtk_container_add(GTK_CONTAINER(Company_frame_info),Company_info_container);
         gtk_widget_set_size_request(Company_frame_info,350,80);
         gtk_fixed_put(GTK_FIXED(Company_container),Company_frame_info,5,5);
+        
+        GtkWidget *Buy_button = gtk_button_new_with_label("Compra Azioni");
+        GtkWidget *Sell_button = gtk_button_new_with_label("Vendi Azioni");
+        
+        gtk_widget_set_usize(GTK_WIDGET(Buy_button),180,40);
+        gtk_widget_set_usize(GTK_WIDGET(Sell_button),180,40);
+        
+        gtk_fixed_put(GTK_FIXED(Company_container),Buy_button, 430,5);
+        gtk_fixed_put(GTK_FIXED(Company_container),Sell_button, 430,45);
+        
     }   
     GtkWidget *Company_graph = create_graph_with_rules(Company_n.x,Company_n.y, POINTS );
     gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,105);

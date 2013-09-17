@@ -126,12 +126,13 @@ main( int argc, char *argv[]){
                     gtk_fixed_put(GTK_FIXED(World_container),Company0_button, 100,100);
                     
                     //need fix
-                    float *px = &get_Company(0).x;
+                    //float post_x[] = get_Company(0).x;
+                    //float post_y[] = get_Company(0).y;
                     
-                    GtkWidget *Company0_graph = create_graph_with_rules(0,0, POINTS );
+                    //GtkWidget *Company0_graph = create_graph_with_rules(post_x, post_y, POINTS );
                     GtkWidget *Company0_label = create_notebook_label(get_Company(0).name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company0_frame = create_company_frame_graph(get_Company(0),Company0_graph);
-                    
+                    //GtkWidget *Company0_frame = create_company_frame_graph(get_Company(0),Company0_graph);
+                    GtkWidget *Company0_frame = create_company_frame(get_Company(0));
                     /*
                     gtk_notebook_insert_page(GTK_NOTEBOOK(notebook), Company0_frame, Company0_label,1);
                     gtk_widget_show_all(notebook);
