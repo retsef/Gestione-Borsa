@@ -7,12 +7,6 @@
 #include <stdbool.h>
 #include <math.h>
 
-Data_notebook *new_data_notebook(){
-    Data_notebook *data;
-    data=malloc(sizeof(Data_notebook));
-    return data;
-}
-
 Company Company0,Company1,Company2,Company3,Company4,Company5;
 
 void init_company(){
@@ -24,7 +18,7 @@ void init_company(){
             Company0.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company0.y[n]=random()%20;
+            Company0.y[n]=Company0.y[n-1]+( pow(-1,random()%2)*(random()%10) );
         }
         Company0.found = Company0.y[POINTS-1];
         //Company0.found = 150000;
@@ -37,7 +31,7 @@ void init_company(){
             Company1.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company1.y[n]=random()%20;
+            Company1.y[n]=Company1.y[n-1]+( pow(-1,random()%2)*(random()%10) );
         }
         Company1.found = Company1.y[POINTS-1];
         //Company1.found = 30000;
@@ -50,7 +44,7 @@ void init_company(){
             Company2.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company2.y[n]=random()%20;
+            Company2.y[n]=Company2.y[n-1]+( pow(-1,random()%2)*(random()%10) );
         }
         Company2.found = Company2.y[POINTS-1];
         //Company2.found = 1700000;
@@ -63,7 +57,7 @@ void init_company(){
             Company3.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company3.y[n]=random()%20;
+            Company3.y[n]=Company3.y[n-1]+( pow(-1,random()%2)*(random()%10) );
         }
         Company3.found = Company3.y[POINTS-1];
         //Company3.found = 5000000;
@@ -76,7 +70,7 @@ void init_company(){
             Company4.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company4.y[n]=random()%20;
+            Company4.y[n]=Company4.y[n-1]+( pow(-1,random()%2)*(random()%10) );
         }
         Company4.found = Company4.y[POINTS-1];
         //Company4.found = 125000; 
@@ -89,7 +83,7 @@ void init_company(){
             Company5.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company5.y[n]=random()%20;
+            Company5.y[n]=Company5.y[n-1]+( pow(-1,random()%2)*(random()%10) );
         }
         Company5.found = Company5.y[POINTS-1];
         //Company5.found = 10000;
@@ -132,14 +126,21 @@ Company* get_Company(int n){
 
 bool update(){
     int n;
-    for(n=0;n<POINTS;n++){
-            Company0.y[n]=random()%20;
-            Company1.y[n]=random()%20;
-            Company2.y[n]=random()%20;
-            Company3.y[n]=random()%20;
-            Company4.y[n]=random()%20;
-            Company5.y[n]=random()%20;
-        }
+    for(n=0;n<POINTS-1;n++){
+        Company0.y[n]=Company0.y[n+1];
+        Company1.y[n]=Company1.y[n+1];
+        Company2.y[n]=Company2.y[n+1];
+        Company3.y[n]=Company3.y[n+1];
+        Company4.y[n]=Company4.y[n+1];
+        Company5.y[n]=Company5.y[n+1];
+    }
+    Company0.y[POINTS]=Company0.y[POINTS-1]+( pow(-1,random()%2)*(random()%10) );
+    Company1.y[POINTS]=Company1.y[POINTS-1]+( pow(-1,random()%2)*(random()%10) );
+    Company2.y[POINTS]=Company2.y[POINTS-1]+( pow(-1,random()%2)*(random()%10) );
+    Company3.y[POINTS]=Company3.y[POINTS-1]+( pow(-1,random()%2)*(random()%10) );
+    Company4.y[POINTS]=Company4.y[POINTS-1]+( pow(-1,random()%2)*(random()%10) );
+    Company5.y[POINTS]=Company5.y[POINTS-1]+( pow(-1,random()%2)*(random()%10) );
+    
     return true;
 }
 
@@ -158,16 +159,18 @@ void Buy(GtkWidget *widget, gpointer data){
     label = gtk_label_new ("Inserire la quota di azioni che si vuole aquisire");
     input = gtk_entry_new();
     
+    char* money = gtk_entry_get_text(GTK_ENTRY(input));
+    
     /* Ensure that the dialog box is destroyed when the user responds. */
-    g_signal_connect_swapped (dialog,"response",
-                              G_CALLBACK (gtk_widget_destroy), dialog);
+    g_signal_connect_swapped (dialog, "response",
+                              G_CALLBACK(Buy_action), money);
 
-    /* Add the label, and show everything we've added to the dialog. */
-    gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+    /* Add the widget, and show everything we've added to the dialog. */
+    gtk_container_add (GTK_CONTAINER(GTK_DIALOG(dialog)->vbox),
                        bancomat);
-    gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+    gtk_container_add (GTK_CONTAINER(GTK_DIALOG(dialog)->vbox),
                        label);
-    gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+    gtk_container_add (GTK_CONTAINER(GTK_DIALOG(dialog)->vbox),
                        input);
 
     gtk_widget_show_all (dialog);
@@ -188,9 +191,11 @@ void Sell(GtkWidget *widget, gpointer data){
     label = gtk_label_new ("Inserire la quota di azioni che si e' disposti a vendere");
     input = gtk_entry_new();
     
+    char* money = gtk_entry_get_text(GTK_ENTRY(input));
+    
     /* Ensure that the dialog box is destroyed when the user responds. */
-    g_signal_connect_swapped (dialog,"response",
-                              G_CALLBACK (gtk_widget_destroy), dialog);
+    g_signal_connect_swapped (dialog, "response",
+                              G_CALLBACK(Sell_action), money);
 
     /* Add the label, and show everything we've added to the dialog. */
     gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
@@ -204,10 +209,35 @@ void Sell(GtkWidget *widget, gpointer data){
     
 }
 
-char* found2Text(float found){
+void Buy_action(char* value){
+    
+}
+
+void Sell_action(char* value){
+    
+}
+
+char* float2Text(float value){
     char str[12];
-    snprintf(str, sizeof(str), "%.03f", found);
+    snprintf(str, sizeof(str), "%.03f", value);
     return &str;
+}
+
+float text2float(char* txt){
+    return atof(txt);
+}
+
+float Value_midrange(Company* pCompany){
+    float aux;
+    int i;
+    for(i=0; i<POINTS; i++){
+        aux = pCompany->y[i];
+    }
+    return (aux/POINTS);
+}
+
+float Statistics(Company* pCompany){
+    
 }
 
 /*

@@ -10,7 +10,7 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#define POINTS 100
+#define POINTS 1000
 
 typedef enum {spa,sapa,srl,srls} society;
 
@@ -31,12 +31,6 @@ typedef struct{
 
 
 
-typedef struct{
-    GtkWidget *label;
-    GtkWidget *notebook;
-    GtkWidget *frame;
-}Data_notebook;
-
 void init_company();
 Company get_Company_by_name(const char* name);
 Company* get_Company(int n);
@@ -45,7 +39,14 @@ bool update();
 void Buy(GtkWidget *widget, gpointer data);
 void Sell(GtkWidget *widget, gpointer data);
 
-char* found2Text(float found);
+float Value_midrange(Company* pCompany);
+float Statistics(Company* pCompany);
+
+void Buy_action(char* value);
+void Sell_action(char* value);
+
+char* float2Text(float found);
 char* type2Text(society val);
+float text2float(char* txt);
 
 #endif

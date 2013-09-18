@@ -123,6 +123,8 @@ GtkWidget * create_graph_with_rules(gfloat *x, gfloat *y, int graph_lenght){
     //errore qui poiche' non vi e' un passaggio di riferimento tra tipi ma tra puntatori
     graph = gtk_databox_lines_new(graph_lenght, x, y, &markerColor, 1);
     gtk_databox_graph_add(GTK_DATABOX(databox), graph);
+    
+    //gtk_databox_set_total_limits(GTK_DATABOX(databox),0,POINTS,100,-100);
     gtk_databox_auto_rescale(GTK_DATABOX(databox), 0.05);
     
     gtk_widget_show_all(databoxcontainer);
@@ -138,19 +140,23 @@ GtkWidget * create_company_frame_graph(Company* Company_n, GtkWidget *Company_gr
         gtk_frame_set_shadow_type(GTK_FRAME(Company_frame_info), GTK_SHADOW_IN);
         
         GtkWidget *Company_info_container = gtk_fixed_new();
-        GtkWidget *Company_info_template = gtk_label_new("Nome:\nTipo:\nFound:");
+        GtkWidget *Company_info_template = gtk_label_new("Nome:\n"
+                "Tipo:                                          Valor Medio:\nFound:                                          Stato:"
+                "");
         GtkWidget *Company_info_name = gtk_label_new(Company_n->name);
         GtkWidget *Company_info_type = gtk_label_new(type2Text(Company_n->type));
-        GtkWidget *Company_info_found = gtk_label_new(found2Text(Company_n->found));
-
+        GtkWidget *Company_info_found = gtk_label_new(float2Text(Company_n->found));
+        GtkWidget *Company_info_midvalue = gtk_label_new(float2Text(Value_midrange(Company_n)));
+        
         gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_template,5,1);
         gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_name,50,1);
         gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_type,50,15);
         gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_found,50,31);
+        gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_midvalue,300,15);
 
         gtk_container_add(GTK_CONTAINER(Company_frame_info),Company_info_container);
         gtk_widget_set_size_request(Company_frame_info,350,80);
-        gtk_fixed_put(GTK_FIXED(Company_container),Company_frame_info,5,5);
+        gtk_fixed_put(GTK_FIXED(Company_container),Company_frame_info,2,2);
         
         GtkWidget *Buy_button = gtk_button_new_with_label("Compra Azioni");
         GtkWidget *Sell_button = gtk_button_new_with_label("Vendi Azioni");
@@ -186,7 +192,7 @@ GtkWidget * create_company_frame(Company* Company_n){
         GtkWidget *Company_info_template = gtk_label_new("Nome:\nTipo:\nFound:");
         GtkWidget *Company_info_name = gtk_label_new(Company_n->name);
         GtkWidget *Company_info_type = gtk_label_new(type2Text(Company_n->type));
-        GtkWidget *Company_info_found = gtk_label_new(found2Text(Company_n->found));
+        GtkWidget *Company_info_found = gtk_label_new(float2Text(Company_n->found));
 
         gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_template,5,1);
         gtk_fixed_put(GTK_FIXED(Company_info_container),Company_info_name,50,1);
