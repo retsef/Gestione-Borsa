@@ -10,6 +10,35 @@ static GtkWidget *Company_frame;
 static GtkWidget *Company_label;
 
 /**
+ * Crea la finestra di About
+ */
+void show_about(GtkWidget *widget, gpointer data){
+
+    GdkPixbuf *image = gdk_pixbuf_new_from_file("images/money.png", NULL);
+    GtkWidget *dialog = gtk_about_dialog_new();
+    const gchar* author = "Roberto Scinocca\n"
+    "   roberto.scinocca@gmail.com\n"
+    "   http://www.github.com/retsef";
+    
+    gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(dialog),"Roberto Scinocca");
+    gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(dialog),"Gestione Borsa");
+    gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(dialog),"Simula i meccanismi degli azionisti");
+    gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(dialog), image);
+    gtk_about_dialog_set_license(GTK_ABOUT_DIALOG(dialog),
+            "Gestione Borsa è software libero; è lecito redistribuirlo o modificarlo\n"
+            "secondo i termini della GNU General Public License \n"
+            "come pubblicata dalla Free Software Foundation;\n"
+            "o la versione 2 o (a propria scelta) una versione successiva.\n\n"
+            "Si veda la licenza GNU General Public License per maggiori dettagli.\n"
+            "\nSi ringrazia la GNOME Foundation per le bellissime librerie GTK.");
+    gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(dialog),&author);
+    g_object_unref(image), image = NULL;
+    gtk_dialog_run(GTK_DIALOG (dialog));
+    gtk_widget_destroy(dialog);
+
+}
+
+/**
  * Crea un tab per il notebook avente il bottone di chiusura
  * @param text Testo sulla linghuetta della tab
  * @param notebook Notebook a cui affiliare la tab
@@ -101,7 +130,7 @@ GtkWidget * create_graph_with_rules(gfloat *x, gfloat *y, int graph_lenght){
     return(databoxcontainer);
 }
 
-GtkWidget * create_company_frame_graph(Company* Company_n, GtkWidget *Company_graph){
+GtkWidget * create_company_frame_graph(Company* Company_n, GtkWidget *Company_graph, gpointer window){
     GtkWidget *Company_frame = gtk_frame_new("Company");
     GtkWidget *Company_container = gtk_fixed_new();
     {
@@ -122,6 +151,20 @@ GtkWidget * create_company_frame_graph(Company* Company_n, GtkWidget *Company_gr
         gtk_container_add(GTK_CONTAINER(Company_frame_info),Company_info_container);
         gtk_widget_set_size_request(Company_frame_info,350,80);
         gtk_fixed_put(GTK_FIXED(Company_container),Company_frame_info,5,5);
+        
+        GtkWidget *Buy_button = gtk_button_new_with_label("Compra Azioni");
+        GtkWidget *Sell_button = gtk_button_new_with_label("Vendi Azioni");
+
+        gtk_widget_set_usize(GTK_WIDGET(Buy_button),180,40);
+        gtk_widget_set_usize(GTK_WIDGET(Sell_button),180,40);
+        
+        g_signal_connect(G_OBJECT(Buy_button), "clicked", 
+                        G_CALLBACK(Buy), (gpointer) window);
+        g_signal_connect(G_OBJECT(Sell_button), "clicked", 
+                        G_CALLBACK(Sell), (gpointer) window);
+
+        gtk_fixed_put(GTK_FIXED(Company_container),Buy_button, 430,5);
+        gtk_fixed_put(GTK_FIXED(Company_container),Sell_button, 430,45);
     }   
     
     gtk_fixed_put(GTK_FIXED(Company_container),Company_graph,5,105);

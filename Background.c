@@ -143,36 +143,64 @@ bool update(){
     return true;
 }
 
-void Buy(GtkButton *button){
+void Buy(GtkWidget *widget, gpointer data){
 
-    GtkWidget *Buy_window;
-    GtkWidget *Buy_container;
-
-    GtkWidget *User_found;
-    GtkWidget *Description;
-
-    GtkWidget *Input;
-
-    Buy_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_position(GTK_WINDOW(Buy_window), GTK_WIN_POS_CENTER);
-    gtk_window_set_title(GTK_WINDOW(Buy_window), "Buy");
-    gtk_container_set_border_width(GTK_CONTAINER(Buy_window), 10);
+    GtkWidget *dialog, *label, *input, *bancomat;
+    /* Create the widgets */
+    dialog = gtk_dialog_new_with_buttons("Compra Azioni", data,
+                                          GTK_DIALOG_DESTROY_WITH_PARENT,
+                                          GTK_STOCK_OK);
     
-    Buy_container = gtk_fixed_new();
-    gtk_container_add(GTK_CONTAINER(Buy_window), Buy_container);
-
-    Description = gtk_label_new("Inserisci il valore che vuoi versare");
-    gtk_fixed_put(GTK_FIXED(Buy_container),GTK_WIDGET(Description),0,0);
-
-
-    Input = gtk_entry_new();
-    gtk_fixed_put(GTK_FIXED(Buy_container),GTK_WIDGET(Input),0,30);
-
-    gtk_widget_show_all(Buy_window);
+    gtk_widget_set_usize(GTK_WIDGET(dialog),350,200);
+    gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
+    bancomat = gtk_image_new_from_file("images/bancomat.png");
+    gtk_widget_set_usize(GTK_WIDGET(bancomat),100,100);
+    label = gtk_label_new ("Inserire la quota di azioni che si vuole aquisire");
+    input = gtk_entry_new();
     
+    /* Ensure that the dialog box is destroyed when the user responds. */
+    g_signal_connect_swapped (dialog,"response",
+                              G_CALLBACK (gtk_widget_destroy), dialog);
+
+    /* Add the label, and show everything we've added to the dialog. */
+    gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+                       bancomat);
+    gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+                       label);
+    gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+                       input);
+
+    gtk_widget_show_all (dialog);
 }
 
-void Sell(GtkButton *button){
+void Sell(GtkWidget *widget, gpointer data){
+    
+    GtkWidget *dialog, *label, *input, *bancomat;
+    /* Create the widgets */
+    dialog = gtk_dialog_new_with_buttons("Vendi Azioni", data,
+                                          GTK_DIALOG_DESTROY_WITH_PARENT,
+                                          GTK_STOCK_OK);
+    
+    gtk_widget_set_usize(GTK_WIDGET(dialog),350,200);
+    gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
+    bancomat = gtk_image_new_from_file("images/bancomat.png");
+    gtk_widget_set_usize(GTK_WIDGET(bancomat),100,100);
+    label = gtk_label_new ("Inserire la quota di azioni che si e' disposti a vendere");
+    input = gtk_entry_new();
+    
+    /* Ensure that the dialog box is destroyed when the user responds. */
+    g_signal_connect_swapped (dialog,"response",
+                              G_CALLBACK (gtk_widget_destroy), dialog);
+
+    /* Add the label, and show everything we've added to the dialog. */
+    gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+                       bancomat);
+    gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+                       label);
+    gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+                       input);
+
+    gtk_widget_show_all (dialog);
     
 }
 

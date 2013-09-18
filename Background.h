@@ -42,8 +42,8 @@ Company get_Company_by_name(const char* name);
 Company* get_Company(int n);
 
 bool update();
-void Buy(GtkButton *button);
-void Sell(GtkButton *button);
+void Buy(GtkWidget *widget, gpointer data);
+void Sell(GtkWidget *widget, gpointer data);
 
 char* found2Text(float found);
 char* type2Text(society val);

@@ -18,34 +18,6 @@
 #include <pthread.h>
 */
 
-/**
- * Crea la finestra di About
- */
-void show_about(GtkWidget *widget, gpointer data){
-
-    GdkPixbuf *image = gdk_pixbuf_new_from_file("images/money.png", NULL);
-    GtkWidget *dialog = gtk_about_dialog_new();
-    const gchar* author = "Roberto Scinocca\n"
-    "   roberto.scinocca@gmail.com\n"
-    "   http://www.github.com/retsef";
-    
-    gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(dialog),"Roberto Scinocca");
-    gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(dialog),"Gestione Borsa");
-    gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(dialog),"Simula i meccanismi degli azionisti");
-    gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(dialog), image);
-    gtk_about_dialog_set_license(GTK_ABOUT_DIALOG(dialog),
-            "Gestione Borsa è software libero; è lecito redistribuirlo o modificarlo\n"
-            "secondo i termini della GNU General Public License \n"
-            "come pubblicata dalla Free Software Foundation;\n"
-            "o la versione 2 o (a propria scelta) una versione successiva.\n\n"
-            "Si veda la licenza GNU General Public License per maggiori dettagli.\n");
-    gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(dialog),&author);
-    g_object_unref(image), image = NULL;
-    gtk_dialog_run(GTK_DIALOG (dialog));
-    gtk_widget_destroy(dialog);
-
-}
-
 main( int argc, char *argv[]){
     
     /*
@@ -125,20 +97,10 @@ main( int argc, char *argv[]){
                     Company0_button = gtk_button_new_with_label(get_Company(0)->name);
                     gtk_fixed_put(GTK_FIXED(World_container),Company0_button, 100,100);
                     
-                    //need fix
-                    //float *post_x = get_Company(0).x;
-                    //float *post_y = get_Company(0).y;
-                    
                     GtkWidget *Company0_graph = create_graph_with_rules(get_Company(0)->x,get_Company(0)->y, POINTS );
                     GtkWidget *Company0_label = create_notebook_label(get_Company(0)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company0_frame = create_company_frame_graph(get_Company(0),Company0_graph);
+                    GtkWidget *Company0_frame = create_company_frame_graph(get_Company(0),Company0_graph, (gpointer) window);
                     //GtkWidget *Company0_frame = create_company_frame(get_Company(0));
-                    /*
-                    gtk_notebook_insert_page(GTK_NOTEBOOK(notebook), Company0_frame, Company0_label,1);
-                    gtk_widget_show_all(notebook);
-
-                    gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook),1);
-                    */
                     /*
                     Data_notebook *data0 = new_data_notebook();
                     
@@ -164,7 +126,7 @@ main( int argc, char *argv[]){
                     
                     GtkWidget *Company1_graph = create_graph_with_rules(get_Company(1)->x,get_Company(1)->y, POINTS );
                     GtkWidget *Company1_label = create_notebook_label(get_Company(1)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company1_frame = create_company_frame_graph(get_Company(1),Company1_graph);
+                    GtkWidget *Company1_frame = create_company_frame_graph(get_Company(1),Company1_graph, (gpointer) window);
                     
                     GtkWidget *data1[3];
                     data1[0] = Company1_frame;
@@ -183,7 +145,7 @@ main( int argc, char *argv[]){
                     
                     GtkWidget *Company2_graph = create_graph_with_rules(get_Company(2)->x,get_Company(2)->y, POINTS );
                     GtkWidget *Company2_label = create_notebook_label(get_Company(2)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company2_frame = create_company_frame_graph(get_Company(2),Company2_graph);
+                    GtkWidget *Company2_frame = create_company_frame_graph(get_Company(2),Company2_graph, (gpointer) window);
                     /*
                     Data_notebook *data2 = new_data_notebook();
                     
@@ -208,7 +170,7 @@ main( int argc, char *argv[]){
                     
                     GtkWidget *Company3_graph = create_graph_with_rules(get_Company(3)->x,get_Company(3)->y, POINTS );
                     GtkWidget *Company3_label = create_notebook_label(get_Company(3)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company3_frame = create_company_frame_graph(get_Company(3),Company3_graph);
+                    GtkWidget *Company3_frame = create_company_frame_graph(get_Company(3),Company3_graph, (gpointer) window);
                     /*
                     Data_notebook *data3 = new_data_notebook();
                     
@@ -233,7 +195,7 @@ main( int argc, char *argv[]){
                     
                     GtkWidget *Company4_graph = create_graph_with_rules(get_Company(4)->x,get_Company(4)->y, POINTS );
                     GtkWidget *Company4_label = create_notebook_label(get_Company(4)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company4_frame = create_company_frame_graph(get_Company(4),Company4_graph);
+                    GtkWidget *Company4_frame = create_company_frame_graph(get_Company(4),Company4_graph, (gpointer) window);
                     /*
                     Data_notebook *data4 = new_data_notebook();
                     
@@ -258,7 +220,7 @@ main( int argc, char *argv[]){
                     
                     GtkWidget *Company5_graph = create_graph_with_rules(get_Company(5)->x,get_Company(5)->y, POINTS );
                     GtkWidget *Company5_label = create_notebook_label(get_Company(5)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company5_frame = create_company_frame_graph(get_Company(5),Company5_graph);
+                    GtkWidget *Company5_frame = create_company_frame_graph(get_Company(5),Company5_graph, (gpointer) window);
                     /*
                     Data_notebook *data5 = new_data_notebook();
                     
@@ -282,9 +244,12 @@ main( int argc, char *argv[]){
             Profile_frame = gtk_frame_new("Home");
             gtk_widget_show(Profile_frame);
             
+            GtkWidget *found = gtk_label_new("");
+            
             GtkWidget *text = gtk_label_new("Qui andranno le informazioni relative alle azioni aquistate \n"
                     "e ai fondi disponibili, oltre alle quote di ingresso/uscita");
             gtk_container_add(GTK_CONTAINER(Profile_frame), text);
+            gtk_container_add(GTK_CONTAINER(Profile_frame), found);
 
             Profile_label = create_notebook_label("Profile", GTK_NOTEBOOK(notebook),FALSE, 9);
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), Profile_frame, Profile_label);
