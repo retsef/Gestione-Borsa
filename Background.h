@@ -10,7 +10,7 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#define POINTS 20
+#define POINTS 100
 
 typedef enum {spa,sapa,srl,srls} society;
 

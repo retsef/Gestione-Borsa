@@ -325,7 +325,7 @@ main( int argc, char *argv[]){
     * set function update_graph to be called whenever 
     * the program is idle
     *------------------------------------------------------*/
-    //g_idle_add_full(G_PRIORITY_HIGH_IDLE+21, (GSourceFunc)update, (gpointer) window, NULL);
+    g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc)update, (gpointer) notebook, NULL);
     
     /* Manda la window in loop in attesa di un nuovo evento*/
     gtk_main();

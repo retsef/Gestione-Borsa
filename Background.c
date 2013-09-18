@@ -24,23 +24,10 @@ void init_company(){
             Company0.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company0.y[n]=n;
+            Company0.y[n]=random()%20;
         }
-        Company0.y[0]=12;
-        Company0.y[3]=5;
-        Company0.y[5]=7;
-        Company0.y[6]=-2;
-        Company0.y[9]=11;
-        Company0.y[10]=10.5;
-        Company0.y[11]=2;
-        Company0.y[12]=4;
-        Company0.y[14]=1;
-        /*
-        for(n=0;n<POINTS;n++){
-            printf("%d,%d\n",n,Company0.y[n]);
-        }*/
-        
-        Company0.found = 150000;
+        Company0.found = Company0.y[POINTS-1];
+        //Company0.found = 150000;
     }
     {
         Company1.name = "La fattoria di Giuseppina";
@@ -50,9 +37,10 @@ void init_company(){
             Company1.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company1.y[n]=n;
+            Company1.y[n]=random()%20;
         }
-        Company1.found = 30000;
+        Company1.found = Company1.y[POINTS-1];
+        //Company1.found = 30000;
     }
     {
         Company2.name = "Abstergo";
@@ -62,9 +50,10 @@ void init_company(){
             Company2.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company2.y[n]=n;
+            Company2.y[n]=random()%20;
         }
-        Company2.found = 1700000;
+        Company2.found = Company2.y[POINTS-1];
+        //Company2.found = 1700000;
     }
     {
         Company3.name = "Aperture";
@@ -74,9 +63,10 @@ void init_company(){
             Company3.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company3.y[n]=n;
+            Company3.y[n]=random()%20;
         }
-        Company3.found = 5000000;
+        Company3.found = Company3.y[POINTS-1];
+        //Company3.found = 5000000;
     }
     {
         Company4.name = "I demolitori di vecchi\n e adorati ricordi";
@@ -86,9 +76,10 @@ void init_company(){
             Company4.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company4.y[n]=n;
+            Company4.y[n]=random()%20;
         }
-        Company4.found = 125000; 
+        Company4.found = Company4.y[POINTS-1];
+        //Company4.found = 125000; 
     }
     {
         Company5.name = "Non siamo la NASA";
@@ -98,12 +89,10 @@ void init_company(){
             Company5.x[n]=n;
         }
         for(n=0;n<POINTS;n++){
-            Company5.y[n]=n;
+            Company5.y[n]=random()%20;
         }
-        Company5.y[4]=7;
-        Company5.y[6]=1;
-        
-        Company5.found = 10000;
+        Company5.found = Company5.y[POINTS-1];
+        //Company5.found = 10000;
     }
 }
 
@@ -142,10 +131,15 @@ Company* get_Company(int n){
 }
 
 bool update(){
-    int n;/*
-    for(n=5;n<20;n++){
-            Company0.y[n]= rand() % 20;
-        }*/
+    int n;
+    for(n=0;n<POINTS;n++){
+            Company0.y[n]=random()%20;
+            Company1.y[n]=random()%20;
+            Company2.y[n]=random()%20;
+            Company3.y[n]=random()%20;
+            Company4.y[n]=random()%20;
+            Company5.y[n]=random()%20;
+        }
     return true;
 }
 
@@ -184,8 +178,8 @@ void Sell(GtkButton *button){
 
 char* found2Text(float found){
     char str[12];
-    snprintf(str, sizeof(str), "%f", found);
-    return str;
+    snprintf(str, sizeof(str), "%.03f", found);
+    return &str;
 }
 
 /*
