@@ -10,13 +10,10 @@
 #include <stdbool.h>
 
 #include <gtk/gtk.h>
+#include <gtkdatabox.h>
 
 #include "Gtk_Widget.h"
 #include "Background.h"
-
-/*
-#include <pthread.h>
-*/
 
 main( int argc, char *argv[]){
     
@@ -100,14 +97,45 @@ main( int argc, char *argv[]){
                     GtkWidget *Company0_graph = create_graph_with_rules(get_Company(0)->x,get_Company(0)->y, POINTS );
                     GtkWidget *Company0_label = create_notebook_label(get_Company(0)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
                     GtkWidget *Company0_frame = create_company_frame_graph(get_Company(0),Company0_graph, (gpointer) window);
-                    //GtkWidget *Company0_frame = create_company_frame(get_Company(0));
-                    /*
-                    Data_notebook *data0 = new_data_notebook();
                     
-                    data0->frame = Company0_frame;
-                    data0->label = Company0_label;
-                    data0->notebook = notebook;
-                    */            
+                    GList *Company0_frame_box = gtk_container_get_children(
+                                                gtk_container_get_children(
+                                                GTK_CONTAINER(gtk_widget_get_ancestor(Company0_frame, GTK_TYPE_CONTAINER)))->data);
+                    //printf(gtk_widget_get_name(Company0_frame_box->data));
+                    /*
+                    printf(gtk_widget_get_name(
+                            gtk_container_get_children(
+                            gtk_container_get_children(
+                            gtk_container_get_children(
+                            gtk_container_get_children(
+                            GTK_CONTAINER(gtk_widget_get_ancestor(Company0_frame, GTK_TYPE_CONTAINER))
+                            )->data)->data)->data)->next->next->next->next->data));*/
+                    //g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) update_graph_scale, (gpointer) Company0_graph_box->next->next->data, NULL);
+                    
+                    
+                    //midvalue
+                    g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) update_Company_info_midvalue, (gpointer) gtk_container_get_children(
+                            gtk_container_get_children(
+                            gtk_container_get_children(
+                            gtk_container_get_children(
+                            GTK_CONTAINER(gtk_widget_get_ancestor(Company0_frame, GTK_TYPE_CONTAINER))
+                            )->data)->data)->data)->next->next->next->next->data, NULL);
+                    
+                    //found
+                    g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) update_Company_info_found, (gpointer) gtk_container_get_children(
+                            gtk_container_get_children(
+                            gtk_container_get_children(
+                            gtk_container_get_children(
+                            GTK_CONTAINER(gtk_widget_get_ancestor(Company0_frame, GTK_TYPE_CONTAINER))
+                            )->data)->data)->data)->next->next->next->data, NULL);
+                    //stats
+                    g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) update_Company_info_stats, (gpointer) gtk_container_get_children(
+                            gtk_container_get_children(
+                            gtk_container_get_children(
+                            gtk_container_get_children(
+                            GTK_CONTAINER(gtk_widget_get_ancestor(Company0_frame, GTK_TYPE_CONTAINER))
+                            )->data)->data)->data)->next->next->next->next->next->data, NULL);
+                    
                     GtkWidget *data0[3];
                     data0[0] = Company0_frame;
                     data0[1] = Company0_label;
@@ -146,13 +174,7 @@ main( int argc, char *argv[]){
                     GtkWidget *Company2_graph = create_graph_with_rules(get_Company(2)->x,get_Company(2)->y, POINTS );
                     GtkWidget *Company2_label = create_notebook_label(get_Company(2)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
                     GtkWidget *Company2_frame = create_company_frame_graph(get_Company(2),Company2_graph, (gpointer) window);
-                    /*
-                    Data_notebook *data2 = new_data_notebook();
                     
-                    data2->frame = Company2_frame;
-                    data2->label = Company2_label;
-                    data2->notebook = notebook;
-                    */
                     GtkWidget *data2[3];
                     data2[0] = Company2_frame;
                     data2[1] = Company2_label;
@@ -171,13 +193,7 @@ main( int argc, char *argv[]){
                     GtkWidget *Company3_graph = create_graph_with_rules(get_Company(3)->x,get_Company(3)->y, POINTS );
                     GtkWidget *Company3_label = create_notebook_label(get_Company(3)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
                     GtkWidget *Company3_frame = create_company_frame_graph(get_Company(3),Company3_graph, (gpointer) window);
-                    /*
-                    Data_notebook *data3 = new_data_notebook();
                     
-                    data3->frame = Company3_frame;
-                    data3->label = Company3_label;
-                    data3->notebook = notebook;
-                    */
                     GtkWidget *data3[3];
                     data3[0] = Company3_frame;
                     data3[1] = Company3_label;
@@ -196,13 +212,7 @@ main( int argc, char *argv[]){
                     GtkWidget *Company4_graph = create_graph_with_rules(get_Company(4)->x,get_Company(4)->y, POINTS );
                     GtkWidget *Company4_label = create_notebook_label(get_Company(4)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
                     GtkWidget *Company4_frame = create_company_frame_graph(get_Company(4),Company4_graph, (gpointer) window);
-                    /*
-                    Data_notebook *data4 = new_data_notebook();
                     
-                    data4->frame = Company4_frame;
-                    data4->label = Company4_label;
-                    data4->notebook = notebook;
-                    */
                     GtkWidget *data4[3];
                     data4[0] = Company4_frame;
                     data4[1] = Company4_label;
@@ -221,13 +231,7 @@ main( int argc, char *argv[]){
                     GtkWidget *Company5_graph = create_graph_with_rules(get_Company(5)->x,get_Company(5)->y, POINTS );
                     GtkWidget *Company5_label = create_notebook_label(get_Company(5)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
                     GtkWidget *Company5_frame = create_company_frame_graph(get_Company(5),Company5_graph, (gpointer) window);
-                    /*
-                    Data_notebook *data5 = new_data_notebook();
                     
-                    data5->frame = Company5_frame;
-                    data5->label = Company5_label;
-                    data5->notebook = notebook;
-                    */
                     GtkWidget *data5[3];
                     data5[0] = Company5_frame;
                     data5[1] = Company5_label;
@@ -242,14 +246,19 @@ main( int argc, char *argv[]){
         
         { /*Tab del Profile*/
             Profile_frame = gtk_frame_new("Home");
-            gtk_widget_show(Profile_frame);
+            GtkWidget *Profile_container = gtk_fixed_new();
             
-            GtkWidget *found = gtk_label_new("");
+            GtkWidget *found = gtk_label_new("Info");
+            GtkWidget *valuta = gtk_label_new("Info Valuta");
             
-            GtkWidget *text = gtk_label_new("Qui andranno le informazioni relative alle azioni aquistate \n"
-                    "e ai fondi disponibili, oltre alle quote di ingresso/uscita");
-            gtk_container_add(GTK_CONTAINER(Profile_frame), text);
-            gtk_container_add(GTK_CONTAINER(Profile_frame), found);
+            GtkWidget *text = gtk_label_new("Benvenuto nella tua pagina amministrativa\n"
+                    "Qui potrai amministrare le tue attivita'\n");
+            
+            gtk_container_add(GTK_CONTAINER(Profile_frame), Profile_container);
+            
+            gtk_fixed_put(GTK_FIXED(Profile_container),text,5,5);
+            gtk_fixed_put(GTK_FIXED(Profile_container),found,10,60);
+            gtk_fixed_put(GTK_FIXED(Profile_container),valuta,300,60);
 
             Profile_label = create_notebook_label("Profile", GTK_NOTEBOOK(notebook),FALSE, 9);
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), Profile_frame, Profile_label);
@@ -287,10 +296,10 @@ main( int argc, char *argv[]){
       G_CALLBACK (gtk_main_quit), NULL);
     
     /*--------------------------------------------------------
-    * set function update_graph to be called whenever 
-    * the program is idle
+    * La seguente funzione aggiorna di continuo lo stato dei plot
+     * tramite evento
     *------------------------------------------------------*/
-    //g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc)update, (gpointer) notebook, NULL);
+    g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) update_graph, (gpointer) notebook, NULL);
     
     /* Manda la window in loop in attesa di un nuovo evento*/
     gtk_main();

@@ -90,6 +90,7 @@
             <linkerLibLibItem>glib-2.0</linkerLibLibItem>
             <linkerLibLibItem>gtkdatabox</linkerLibLibItem>
             <linkerLibLibItem>gmodule-2.0</linkerLibLibItem>
+            <linkerLibLibItem>pthread</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
