@@ -4,6 +4,9 @@
  *
  * Created on 3 agosto 2013, 2.21
  */
+#ifndef GTKWIDGET_H
+#define GTKWIDGET_H
+
 #include "Background.h"
 #include <stdbool.h>
 #include <gtk/gtk.h>
@@ -15,3 +18,5 @@ GdkPixbuf * create_pixbuf(const gchar * filename);
 GtkWidget * create_graph_with_rules(gfloat *x, gfloat *y, int graph_lenght);
 GtkWidget * create_company_frame_graph(Company* Company_n, GtkWidget *Company_graph, gpointer window);
 void create_company_tab(GtkButton *button, GtkWidget *array[]);
+
+#endif
