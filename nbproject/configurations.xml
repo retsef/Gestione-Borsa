@@ -4,7 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>Background.h</itemPath>
+      <itemPath>Store.h</itemPath>
       <itemPath>Widget.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -24,7 +24,6 @@
       </logicalFolder>
       <itemPath>gpl-2.0.txt</itemPath>
       <itemPath>main.c</itemPath>
-      <itemPath>realtimeplot.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -93,9 +92,9 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="Background.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Store.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Store.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Widget.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -115,8 +114,6 @@
             flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="realtimeplot.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -139,9 +136,9 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="Background.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Store.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Store.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Widget.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -161,8 +158,6 @@
             flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="realtimeplot.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
   </confs>

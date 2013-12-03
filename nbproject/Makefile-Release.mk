@@ -37,8 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/Store.o \
 	${OBJECTDIR}/Widget.o \
-	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/realtimeplot.o
+	${OBJECTDIR}/main.o
 
 
 # C Compiler Flags
@@ -79,11 +78,6 @@ ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
-
-${OBJECTDIR}/realtimeplot.o: realtimeplot.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/realtimeplot.o realtimeplot.c
 
 # Subprojects
 .build-subprojects:

@@ -2,41 +2,29 @@
  * File:   main.c
  * Author: roberto
  *
- * Created on 28 luglio 2013, 16.14
+ * Created on 4 ottobre 2013, 13.35
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
-#include <gtk/gtk.h>
-#include <gtkdatabox.h>
-
-#include "Widget.h"
 #include "Store.h"
+#include "Widget.h"
 
-main( int argc, char *argv[]){
-    
-    /*
-     * Inizializziamo le librerie GTK+
-     */
+int main(int argc, char** argv) {
+    /*Inizializziamo le librerie GTK+*/
     gtk_init(&argc, &argv);
+    
+    if (pthread_mutex_init(&lock, NULL) != 0)
+    {
+        printf("\n mutex init failed\n");
+        return 1;
+    }
+    gdk_threads_init();
     
     GtkWidget *window; //finestra principale
     GtkWidget *about; //finestra di about
-    
     GtkWidget *fixed; //griglia per posizionare i widget
+    GtkWidget *notebook; //notebook con tab
     
-    GtkWidget *notebook;
-    GtkWidget *World_frame,*Profile_frame;
-    GtkWidget *World_label,*Profile_label;
-    /*
-     * Inizializziamo le librerie GTK+
-     */
-    gtk_init(&argc, &argv);
-    
-    /*
-     * Creiamo un GtkWindow di tipo widget. 
+    /* Creiamo un GtkWindow di tipo widget. 
      * La window e' di tipo GTK_WINDOW_TOPLEVEL.
      * 
      * GTK_WINDOW_TOPLEVEL ha gia' barra del titolo e bordi 
@@ -53,222 +41,92 @@ main( int argc, char *argv[]){
         //Imposta icona finestra
         gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("images/money.png"));
         //Imposta il bordo tra la finetra ed il suo contenuto
-        gtk_container_set_border_width(GTK_CONTAINER(window), 3);
+        gtk_container_set_border_width(GTK_CONTAINER(window), 10);
         //Imposta l'impossibilita' di ridimensionare la finestra
         gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
     }
-    
-    fixed = gtk_fixed_new(); //container del bottone
+    fixed = gtk_fixed_new(); //container della finestra
     
     /* Notebook con le tab*/
     notebook = gtk_notebook_new();
     gtk_notebook_set_tab_pos(GTK_NOTEBOOK(notebook), GTK_POS_BOTTOM);
-    gtk_fixed_put(GTK_FIXED(fixed), notebook, 10, 10);
-    gtk_widget_set_size_request(notebook, 700, 500);
-
+    gtk_fixed_put(GTK_FIXED(fixed), notebook, 0, 0);
+    gtk_widget_set_size_request(notebook, 710, 510);
     {
-        { /*Tab del World*/
-            World_frame = gtk_frame_new("Nation Exposer");
-            gtk_widget_show(World_frame);
+        
+        GtkWidget *World_container;
             
-            GtkWidget *World_container = gtk_fixed_new();
-
-            GtkWidget *map = gtk_image_new_from_file("images/world_red_cntry_globe_hammer.gi.gif");
-            //GtkWidget *text = gtk_label_new("Qui andra' una cartina contenente \n"
-            //        "i vari titoli azionari (cliccabili)");
-            gtk_container_add(GTK_CONTAINER(World_frame), World_container);
+        { /*Tab del World*/
+            GtkWidget *World_label;
+            GtkWidget *map;
+            
+            World_container = gtk_fixed_new();
+            World_label = create_notebook_label("World", GTK_NOTEBOOK(notebook),FALSE, 0);
+            map = gtk_image_new_from_file("images/world_globe.gif");
+            
             gtk_fixed_put(GTK_FIXED(World_container), map, 10, 10);
             gtk_widget_set_size_request(map, 670, 410);
-            //gtk_fixed_put(GTK_FIXED(World_container), text, 250, 200);
 
-            World_label = create_notebook_label("World", GTK_NOTEBOOK(notebook),FALSE, 0);
-            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), World_frame, World_label);
-            
-            {   
-                //inizializziamo i dati delle company
-                init_company();
-                
-                {
-                    //bottone
-                    GtkWidget *Company0_button;
-                    Company0_button = gtk_button_new_with_label(get_Company(0)->name);
-                    gtk_fixed_put(GTK_FIXED(World_container),Company0_button, 100,100);
-                    
-                    GtkWidget *Company0_graph = create_graph_with_rules(get_Company(0)->x,get_Company(0)->y, POINTS );
-                    GtkWidget *Company0_label = create_notebook_label(get_Company(0)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company0_frame = create_company_frame_graph(get_Company(0),Company0_graph, (gpointer) window);
-                    
-                    GList *Company0_frame_box = gtk_container_get_children(
-                                                gtk_container_get_children(
-                                                GTK_CONTAINER(gtk_widget_get_ancestor(Company0_frame, GTK_TYPE_CONTAINER)))->data);
-                    //printf(gtk_widget_get_name(Company0_frame_box->data));
-                    /*
-                    printf(gtk_widget_get_name(
-                            gtk_container_get_children(
-                            gtk_container_get_children(
-                            gtk_container_get_children(
-                            gtk_container_get_children(
-                            GTK_CONTAINER(gtk_widget_get_ancestor(Company0_frame, GTK_TYPE_CONTAINER))
-                            )->data)->data)->data)->next->next->next->next->data));*/
-                    //g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) update_graph_scale, (gpointer) Company0_graph_box->next->next->data, NULL);
-                    
-                    
-                    //midvalue
-                    g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) update_Company_info_midvalue, (gpointer) gtk_container_get_children(
-                            gtk_container_get_children(
-                            gtk_container_get_children(
-                            gtk_container_get_children(
-                            GTK_CONTAINER(gtk_widget_get_ancestor(Company0_frame, GTK_TYPE_CONTAINER))
-                            )->data)->data)->data)->next->next->next->next->data, NULL);
-                    
-                    //found
-                    g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) update_Company_info_found, (gpointer) gtk_container_get_children(
-                            gtk_container_get_children(
-                            gtk_container_get_children(
-                            gtk_container_get_children(
-                            GTK_CONTAINER(gtk_widget_get_ancestor(Company0_frame, GTK_TYPE_CONTAINER))
-                            )->data)->data)->data)->next->next->next->data, NULL);
-                    //stats
-                    g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) update_Company_info_stats, (gpointer) gtk_container_get_children(
-                            gtk_container_get_children(
-                            gtk_container_get_children(
-                            gtk_container_get_children(
-                            GTK_CONTAINER(gtk_widget_get_ancestor(Company0_frame, GTK_TYPE_CONTAINER))
-                            )->data)->data)->data)->next->next->next->next->next->data, NULL);
-                    
-                    GtkWidget *data0[3];
-                    data0[0] = Company0_frame;
-                    data0[1] = Company0_label;
-                    data0[2] = notebook;
-                    
-                    //evento
-                    g_signal_connect(G_OBJECT(Company0_button), "clicked", 
-                        (GtkSignalFunc)create_company_tab, data0);
-                    
-                }
-                {
-                    //bottone
-                    GtkWidget *Company1_button;
-                    Company1_button = gtk_button_new_with_label(get_Company(1)->name);
-                    gtk_fixed_put(GTK_FIXED(World_container),Company1_button, 100,170);
-                    
-                    GtkWidget *Company1_graph = create_graph_with_rules(get_Company(1)->x,get_Company(1)->y, POINTS );
-                    GtkWidget *Company1_label = create_notebook_label(get_Company(1)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company1_frame = create_company_frame_graph(get_Company(1),Company1_graph, (gpointer) window);
-                    
-                    GtkWidget *data1[3];
-                    data1[0] = Company1_frame;
-                    data1[1] = Company1_label;
-                    data1[2] = notebook;
-                    
-                    //evento
-                    g_signal_connect(G_OBJECT(Company1_button), "clicked", 
-                        (GtkSignalFunc)create_company_tab, data1);
-                }
-                {
-                    //bottone
-                    GtkWidget *Company2_button;
-                    Company2_button = gtk_button_new_with_label(get_Company(2)->name);
-                    gtk_fixed_put(GTK_FIXED(World_container),Company2_button, 100,240);
-                    
-                    GtkWidget *Company2_graph = create_graph_with_rules(get_Company(2)->x,get_Company(2)->y, POINTS );
-                    GtkWidget *Company2_label = create_notebook_label(get_Company(2)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company2_frame = create_company_frame_graph(get_Company(2),Company2_graph, (gpointer) window);
-                    
-                    GtkWidget *data2[3];
-                    data2[0] = Company2_frame;
-                    data2[1] = Company2_label;
-                    data2[2] = notebook;
-                    
-                    //evento
-                    g_signal_connect(G_OBJECT(Company2_button), "clicked", 
-                        (GtkSignalFunc)create_company_tab, data2);
-                }
-                {
-                    //bottone
-                    GtkWidget *Company3_button;
-                    Company3_button = gtk_button_new_with_label(get_Company(3)->name);
-                    gtk_fixed_put(GTK_FIXED(World_container),Company3_button, 400,100);
-                    
-                    GtkWidget *Company3_graph = create_graph_with_rules(get_Company(3)->x,get_Company(3)->y, POINTS );
-                    GtkWidget *Company3_label = create_notebook_label(get_Company(3)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company3_frame = create_company_frame_graph(get_Company(3),Company3_graph, (gpointer) window);
-                    
-                    GtkWidget *data3[3];
-                    data3[0] = Company3_frame;
-                    data3[1] = Company3_label;
-                    data3[2] = notebook;
-                    
-                    //evento
-                    g_signal_connect(G_OBJECT(Company3_button), "clicked", 
-                        (GtkSignalFunc)create_company_tab, data3);
-                }
-                {
-                    //bottone
-                    GtkWidget *Company4_button;
-                    Company4_button = gtk_button_new_with_label(get_Company(4)->name);
-                    gtk_fixed_put(GTK_FIXED(World_container),Company4_button, 400,170);
-                    
-                    GtkWidget *Company4_graph = create_graph_with_rules(get_Company(4)->x,get_Company(4)->y, POINTS );
-                    GtkWidget *Company4_label = create_notebook_label(get_Company(4)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company4_frame = create_company_frame_graph(get_Company(4),Company4_graph, (gpointer) window);
-                    
-                    GtkWidget *data4[3];
-                    data4[0] = Company4_frame;
-                    data4[1] = Company4_label;
-                    data4[2] = notebook;
-                    
-                    //evento
-                    g_signal_connect(G_OBJECT(Company4_button), "clicked", 
-                        (GtkSignalFunc)create_company_tab, data4);
-                }
-                {
-                    //bottone
-                    GtkWidget *Company5_button;
-                    Company5_button = gtk_button_new_with_label(get_Company(5)->name);
-                    gtk_fixed_put(GTK_FIXED(World_container),Company5_button, 400,240);
-                    
-                    GtkWidget *Company5_graph = create_graph_with_rules(get_Company(5)->x,get_Company(5)->y, POINTS );
-                    GtkWidget *Company5_label = create_notebook_label(get_Company(5)->name, GTK_NOTEBOOK(notebook),TRUE, 1);
-                    GtkWidget *Company5_frame = create_company_frame_graph(get_Company(5),Company5_graph, (gpointer) window);
-                    
-                    GtkWidget *data5[3];
-                    data5[0] = Company5_frame;
-                    data5[1] = Company5_label;
-                    data5[2] = notebook;
-                    
-                    //evento
-                    g_signal_connect(G_OBJECT(Company5_button), "clicked", 
-                        (GtkSignalFunc)create_company_tab, data5);
-                }
-            }
+            gtk_notebook_append_page(GTK_NOTEBOOK(notebook), World_container, World_label);   
         }
-        
+        //inizializzo l'azionista
+        init_User(2500);
+        /**
+         * Creare urgentemente una struttura qui sotto per poter fare il draw realtime dei label del Actionist
+         */
         { /*Tab del Profile*/
-            Profile_frame = gtk_frame_new("Home");
-            GtkWidget *Profile_container = gtk_fixed_new();
+            GtkWidget *Profile_frame, *Profile_container, *Profile_label;
             
-            GtkWidget *found = gtk_label_new("Info");
-            GtkWidget *valuta = gtk_label_new("Info Valuta");
+            Profile_frame = gtk_frame_new("Home");
+            Profile_container = gtk_fixed_new();
+            
+            Actionist_Profile* actionist_home = new_Actionist_profile(get_User(),GTK_FIXED(Profile_container));
             
             GtkWidget *text = gtk_label_new("Benvenuto nella tua pagina amministrativa\n"
                     "Qui potrai amministrare le tue attivita'\n");
             
+            
             gtk_container_add(GTK_CONTAINER(Profile_frame), Profile_container);
             
             gtk_fixed_put(GTK_FIXED(Profile_container),text,5,5);
-            gtk_fixed_put(GTK_FIXED(Profile_container),found,10,60);
-            gtk_fixed_put(GTK_FIXED(Profile_container),valuta,300,60);
-
+/*
+            gtk_fixed_put(GTK_FIXED(Profile_container),found_frame,10,60);
+            gtk_fixed_put(GTK_FIXED(Profile_container),action_frame,10,150);
+*/
+            //inizializzo le componenti del programma tra cui le company e le comp. grafiche delle company
+            //init_all_Company();
+            //init_all_Company_exposer(GTK_NOTEBOOK(notebook), window);
+            //init_all_Action(GTK_FIXED(actionist_home->action_container));
+            INIT_ALL(GTK_NOTEBOOK(notebook),GTK_FIXED(actionist_home->action_container), window);
+            
             Profile_label = create_notebook_label("Profile", GTK_NOTEBOOK(notebook),FALSE, 9);
             gtk_notebook_append_page(GTK_NOTEBOOK(notebook), Profile_frame, Profile_label);
+            
+            //g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) update_actionist_profile_draw, (gpointer) actionist_home, NULL);
+            actionist_home->idle = pthread_create(&actionist_home->thread,NULL,update_actionist_profile_draw,(void *) actionist_home);
         }
+        
+        
+        
+        { /*Oggi inerenti alle company*/
+            gtk_fixed_put(GTK_FIXED(World_container),get_Company_exposer(0)->button, 100,100);
+            
+            gtk_fixed_put(GTK_FIXED(World_container),get_Company_exposer(1)->button, 100,170);
+            
+            gtk_fixed_put(GTK_FIXED(World_container),get_Company_exposer(2)->button, 100,240);
+            
+            gtk_fixed_put(GTK_FIXED(World_container),get_Company_exposer(3)->button, 400,100);
+            
+            gtk_fixed_put(GTK_FIXED(World_container),get_Company_exposer(4)->button, 400,170);
+            
+            gtk_fixed_put(GTK_FIXED(World_container),get_Company_exposer(5)->button, 400,240);
+            
+        }
+        
+        
     }
     
-    /*
-     * Bottoni vari
-     */
-    
+    /* Bottoni vari */
     about = gtk_button_new_with_label("About");//aggiunge il bottone di about
     gtk_fixed_put(GTK_FIXED(fixed), about, 630, 505);
     gtk_widget_set_size_request(about, 80, 35);
@@ -281,27 +139,27 @@ main( int argc, char *argv[]){
       GtkWidget *gtk = gtk_image_new_from_file("images/gtk-banner.png"); 
       GtkWidget *text = gtk_label_new("Powered by");
       gtk_fixed_put(GTK_FIXED(fixed), text, 0, 520);
-      gtk_fixed_put(GTK_FIXED(fixed), gtk, 75, 520);
+      gtk_fixed_put(GTK_FIXED(fixed), gtk, 87, 525);
       gtk_widget_show(gtk);
       gtk_widget_show(text);
     }
     
-    //Mostra tutti i windget della finestra
     gtk_container_add(GTK_CONTAINER(window), fixed);
-    
-    gtk_widget_show_all(window); //<-- da fixare perche' mosta TUTTI i widget compresi quelli da oscurare
-    
-    //Evento della window per distrugerla quando viene chiusa
-    g_signal_connect(window, "destroy", 
-      G_CALLBACK (gtk_main_quit), NULL);
-    
+      
     /*--------------------------------------------------------
     * La seguente funzione aggiorna di continuo lo stato dei plot
-     * tramite evento
+    * in particolare la renderizzazione tramite evento
     *------------------------------------------------------*/
-    g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) update_graph, (gpointer) notebook, NULL);
+    g_idle_add_full(G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) update_graph_draw, (gpointer) notebook, NULL);
+      
+    //Mostra tutti i windget della finestra
+    gtk_widget_show_all(window);
     
-    /* Manda la window in loop in attesa di un nuovo evento*/
+    //Evento della window per distrugerla quando viene chiusa e tutti i dati allocati precedentemente
+    g_signal_connect(window, "destroy", 
+      G_CALLBACK (exit_Application), NULL);
+    /*
+     * Mandiamo in esecuzione le gtk
+     */
     gtk_main();
-    
 }
