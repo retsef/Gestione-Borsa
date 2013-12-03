@@ -1,7 +1,7 @@
 /**
  * Qui verranno istanziati le varie Company e il server di aggiornamenti dei Found
  */
-#include "Background.h"
+#include "Store.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>

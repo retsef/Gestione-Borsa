@@ -35,8 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/Background.o \
-	${OBJECTDIR}/Gtk_Widget.o \
+	${OBJECTDIR}/Store.o \
+	${OBJECTDIR}/Widget.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/realtimeplot.o
 
@@ -65,25 +65,25 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestione-borsa: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/gestione-borsa ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/Background.o: Background.c 
+${OBJECTDIR}/Store.o: Store.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Background.o Background.c
+	${RM} "$@.d"
+	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Store.o Store.c
 
-${OBJECTDIR}/Gtk_Widget.o: Gtk_Widget.c 
+${OBJECTDIR}/Widget.o: Widget.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -MMD -MP -MF $@.d -o ${OBJECTDIR}/Gtk_Widget.o Gtk_Widget.c
+	${RM} "$@.d"
+	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Widget.o Widget.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.c
+	${RM} "$@.d"
+	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
 
 ${OBJECTDIR}/realtimeplot.o: realtimeplot.c 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -MMD -MP -MF $@.d -o ${OBJECTDIR}/realtimeplot.o realtimeplot.c
+	${RM} "$@.d"
+	$(COMPILE.c) -g -I/usr/include/gtk-2.0 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/include/atk-1.0 -I/usr/include/pango-1.0 -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/lib/glib-2.0/include -I/usr/lib/gtk-2.0/include -I/usr/include/gdk-pixbuf-2.0 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/realtimeplot.o realtimeplot.c
 
 # Subprojects
 .build-subprojects:

@@ -12,8 +12,8 @@
 #include <gtk/gtk.h>
 #include <gtkdatabox.h>
 
-#include "Gtk_Widget.h"
-#include "Background.h"
+#include "Widget.h"
+#include "Store.h"
 
 main( int argc, char *argv[]){
     

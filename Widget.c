@@ -1,5 +1,5 @@
-#include "Gtk_Widget.h"
-#include "Background.h"
+#include "Widget.h"
+#include "Store.h"
 #include <stdbool.h>
 #include <gtk/gtk.h>
 #include <gtkdatabox.h>

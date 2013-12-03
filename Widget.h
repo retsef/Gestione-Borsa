@@ -7,7 +7,7 @@
 #ifndef GTKWIDGET_H
 #define GTKWIDGET_H
 
-#include "Background.h"
+#include "Store.h"
 #include <stdbool.h>
 #include <gtk/gtk.h>
 
